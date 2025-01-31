@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libopenal.so.1.17.2
+/usr/share
+/usr/share/doc
+/usr/share/doc/libopenal1
+/usr/share/doc/libopenal1/changelog.Debian.armel.gz
+/usr/share/doc/libopenal1/changelog.Debian.gz
+/usr/share/doc/libopenal1/changelog.gz
+/usr/share/doc/libopenal1/copyright
+/usr/share/doc/libopenal1/examples
+/usr/share/doc/libopenal1/examples/alsoftrc.sample.gz
+/usr/lib/arm-linux-gnueabi/libopenal.so.1

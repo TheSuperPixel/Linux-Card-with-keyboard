@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libxmu6
+/usr/share/doc/libxmu6/changelog.Debian.gz
+/usr/share/doc/libxmu6/changelog.gz
+/usr/share/doc/libxmu6/copyright
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libXmu.so.6.2.0
+/usr/lib/arm-linux-gnueabi/libXmu.so.6

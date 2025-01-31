@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/gtk-2.0
+/usr/lib/arm-linux-gnueabi/gtk-2.0/modules
+/usr/lib/arm-linux-gnueabi/gtk-2.0/modules/libferret.so
+/usr/lib/arm-linux-gnueabi/gtk-2.0/modules/libgail.so
+/usr/share
+/usr/share/doc
+/usr/share/doc/libgail-common
+/usr/share/doc/libgail-common/changelog.Debian.gz
+/usr/share/doc/libgail-common/changelog.gz
+/usr/share/doc/libgail-common/copyright

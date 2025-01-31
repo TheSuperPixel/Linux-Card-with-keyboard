@@ -1,0 +1,8 @@
+44726bd50e17a13e24f03d9441dbe466  usr/bin/whiptail
+bcd454929e3a3107961ba3cb1a98c5f4  usr/share/bash-completion/completions/whiptail
+408dd0317437d489fde1b01b410ecb2b  usr/share/doc/whiptail/README.whiptail
+e7ab1793d757f5c715130cd8a22ad3ee  usr/share/doc/whiptail/changelog.Debian.armel.gz
+33e152140a392fcb25e1c5dace688192  usr/share/doc/whiptail/changelog.Debian.gz
+779cde986558e8a58a34ff9d72e6a06f  usr/share/doc/whiptail/changelog.gz
+28e0723bd9e4ce7a7a08cf21b2c58f34  usr/share/doc/whiptail/copyright
+52ab5533053984d159d94c0b70aa552e  usr/share/man/man1/whiptail.1.gz

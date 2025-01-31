@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libpostproc.so.54.1.100
+/usr/share
+/usr/share/doc
+/usr/share/doc/libpostproc54
+/usr/share/doc/libpostproc54/changelog.Debian.gz
+/usr/share/doc/libpostproc54/changelog.gz
+/usr/share/doc/libpostproc54/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libpostproc54
+/usr/lib/arm-linux-gnueabi/libpostproc.so.54

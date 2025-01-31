@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libwavpack.so.1.2.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libwavpack1
+/usr/share/doc/libwavpack1/changelog.Debian.gz
+/usr/share/doc/libwavpack1/changelog.gz
+/usr/share/doc/libwavpack1/copyright
+/usr/lib/arm-linux-gnueabi/libwavpack.so.1

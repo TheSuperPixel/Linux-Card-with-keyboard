@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>Dependencies between server and drivers</title>
+<link rel="stylesheet" href="../xsf.css" type="text/css" />
+
+
+<script type="text/javascript" src="../asciidoc-xhtml11.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1><a href="../index.html">XSF</a> / Dependencies between server and drivers</h1>
+<span id="author">Cyril Brulebois</span><br />
+<span id="email"><code>&lt;<a href="mailto:kibi@debian.org">kibi@debian.org</a>&gt;</code></span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_upstream_side_abi_version_numbers">Upstream-side: ABI version numbers</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The X server defines several
+<a href="http://en.wikipedia.org/wiki/Application_binary_interface">ABI</a> version numbers in the
+<code>hw/xfree86/common/xf86Module.h</code> header, through the
+<code>SET_ABI_VERSION(maj,min)</code> macro. In this document, the focus is on
+<code>ABI_VIDEODRV_VERSION</code> and <code>ABI_XINPUT_VERSION</code>, which are
+respectively about <code>video</code> drivers and <code>input</code> drivers.</p></div>
+<div class="paragraph"><p>An example of input ABI is <code>12.1</code>, <code>12</code> being the <code>major</code>, <code>1</code> being
+the <code>minor</code>.</p></div>
+<div class="paragraph"><p>Like in usual shared libraries, the major is bumped when interfaces
+are broken. There’s no compatibility at all in that case.</p></div>
+<div class="paragraph"><p>The minor gets bumped when interfaces are added. In other words, if a
+driver is working with <code>x.y</code>, it should also work with higher minors:
+<code>x.z</code>; <code>z&gt;y</code>. The converse is not true, if a driver requires a given
+minor (for example because it needs a new feature, like MultiTouch),
+it won’t work with lower minors (which didn’t provide the needed
+feature). Put another way: we have ascending compatibility with the
+minors.</p></div>
+<div class="paragraph"><p>Conclusion: We need to keep track of both major and minor.</p></div>
+<div class="paragraph"><p>Thanks to <code>pkg-config</code> we can query them:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ pkg-config --variable=abi_videodrv xorg-server
+9.0
+$ pkg-config --variable=abi_xinput xorg-server
+12.1</code></pre>
+</div></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_debian_side_using_virtual_packages">Debian-side: Using virtual packages</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_server_s_build_system">Server’s build system</h3>
+<div class="paragraph"><p>When <code>xorg-server</code> gets built, we use <code>pkg-config</code>’s output to
+determine the current major. Through substitution variables, we add
+two virtual packages in the <code>Provides</code> field of the server (for both
+<code>xserver-xorg-core</code> and <code>xserver-xorg-core-udeb</code>): <code>xorg-input-abi-$x</code>
+and <code>xorg-video-abi-$y</code>, where <code>$x</code> and <code>$y</code> are the major part of the
+version queried through <code>pkg-config</code> variables.</p></div>
+<div class="paragraph"><p>To handle ascending compatibility for minors, we maintain in
+<code>debian/serverminver</code> the minimal version of <code>xserver-xorg-core</code> which
+is needed. When a minor is bumped, we store the server version in that
+file. This way, drivers built afterwards will depend on a <strong>minimal</strong>
+version of the driver, the last which saw a minor version bump. In
+other words: they will “depend on the server version they were built
+against, or a higher/compatible one”.</p></div>
+<div class="paragraph"><p>Both ABI and minimal server version are recorded in two files shipped
+in <code>xserver-xorg-dev</code>, to be used while building drivers:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>/usr/share/xserver-xorg/xinputdep</code>
+</p>
+</li>
+<li>
+<p>
+<code>/usr/share/xserver-xorg/videodrvdep</code>
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Example for <code>xinputdep</code>:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>xorg-input-abi-11, xserver-xorg-core (&gt;= 2:1.8.99.904)</code></pre>
+</div></div>
+<div class="paragraph"><p>To make sure we bump the <code>debian/serverminver</code> when there’s a minor
+ABI change, there’s a <code>abibumpcheck</code> target (on which <code>clean</code>
+depends), which extracts input and video ABI from the upstream header,
+and compares them to the previous ones stored in
+<code>debian/serverminver</code>, failing and diffing is something changed.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_driver_s_control_file">Driver’s control file</h3>
+<div class="paragraph"><p>Drivers also use substitution variables in their control file,
+replaced at build time.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># Input driver:
+Depends: ${xinpdriver:Depends}, …
+Provides: ${xinpdriver:Provides}
+
+# Video driver:
+Depends: ${xviddriver:Depends}, …
+Provides: ${xviddriver:Provides}</code></pre>
+</div></div>
+<div class="paragraph"><p>For now, <code>${xinpdriver:Provides}</code> is always replaced with
+<code>xorg-driver-input</code>, and <code>${xviddriver:Provides}</code> is always replaced
+with <code>xorg-driver-video</code>. Hopefully provided packages will not change,
+but using substitution variables is cheap, and makes it easy to add
+tweaks afterwards if needed.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_driver_s_build_system">Driver’s build system</h3>
+<div class="paragraph"><p>To set those variables, we ship a <code>dh_xsf_substvars</code> script in
+<code>xserver-xorg-dev</code> starting with <code>2:1.9.4</code>, to be run before
+<code>dh_gencontrol</code>. It iterates on the packages listed by
+<code>dh_listpackages</code> (very old <code>debhelper</code> command) and does the
+following work:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+It reads variables from the files mentioned above.
+</p>
+</li>
+<li>
+<p>
+If a package name ends with <code>-udeb</code>, it replaces
+   <code>xserver-xorg-core</code> with <code>xserver-xorg-core-udeb</code>.
+</p>
+</li>
+<li>
+<p>
+If a package name ends with <code>-dbg</code>, it does nothing for this
+   package. Debug packages usually depend strictly on the non-debug
+   packages, which in turn have appropriate dependencies.
+</p>
+</li>
+<li>
+<p>
+If a package name starts with <code>xserver-xorg-input-</code>, it appends
+   <code>xinpdriver:Depends=…</code> and <code>xinpdriver:Provides=…</code> to this
+   package’s substvars file.
+</p>
+</li>
+<li>
+<p>
+If a package name starts with <code>xserver-xorg-video-</code>, it appends
+   <code>xviddriver:Depends=…</code> and <code>xviddriver:Provides=…</code> to this
+   package’s substvars file.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Why such heuristics? The idea is to avoid getting “unused substitution
+variable” warning messages while building. And since there’s a clear
+<code>xserver-xorg-{input,video}-*</code> namespace, we can use that to specify
+only input-related variables for input drivers, and only video-related
+variables for video drivers.</p></div>
+<div class="paragraph"><p>To make it easy to compute substvars when using <code>dh</code>, a <code>dh</code> sequence
+(<code>xsf.pm</code>) is shipped. As of <code>2:1.9.4-1</code>, it inserts
+<code>dh_xsf_substvars</code> right before the <code>dh_gencontrol</code> call. Other
+repetitive tasks could also be automated this way.</p></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sample_driver_packaging">Sample driver packaging</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The following assumes:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+The upstream build system is sane enough, which lets us run
+   <code>autoreconf</code> at build time.
+</p>
+</li>
+<li>
+<p>
+It is a <code>video</code> driver. For an <code>input</code> driver, replace both
+   <code>xviddriver</code> occurrences with <code>xinpdriver</code>.
+</p>
+</li>
+</ul></div>
+<div class="sect2">
+<h3 id="_sample_debian_control_file">Sample debian/control file</h3>
+<div class="listingblock">
+<div class="content">
+<pre><code>Build-Depends:
+ debhelper (&gt;= 8),
+ dh-autoreconf,
+ quilt,
+ xserver-xorg-dev (&gt;= 2:1.9.4),</code></pre>
+</div></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>Depends:
+ ${shlibs:Depends},
+ ${misc:Depends},
+ ${xviddriver:Depends},
+Provides:
+ ${xviddriver:Provides}</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_sample_debian_rules_file">Sample debian/rules file</h3>
+<div class="listingblock">
+<div class="content">
+<pre><code>#!/usr/bin/make -f
+
+# Configuration:
+#override_dh_auto_configure:
+#        dh_auto_configure -- --with-FOO --without-BAR
+
+# Install in debian/tmp to retain control through dh_install:
+override_dh_auto_install:
+        dh_auto_install --destdir=debian/tmp
+
+# Kill *.la files, and forget no-one:
+override_dh_install:
+        find debian/tmp -name '*.la' -delete
+        dh_install --fail-missing
+
+## Debug package:
+#override_dh_strip:
+#        dh_strip --dbg-package=xserver-xorg-video-DRIVER-dbg
+
+# That's a plugin, use appropriate warning level:
+override_dh_shlibdeps:
+        dh_shlibdeps -- --warnings=6
+
+%:
+        dh $@ --with quilt,autoreconf,xsf --builddirectory=build/</code></pre>
+</div></div>
+<div class="paragraph"><p>Some comments:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>dh_auto_configure</code>: Commented out since there’s usually no
+   specific option to pass when building drivers. Sometimes needed to
+   get a related utility built.
+</p>
+</li>
+<li>
+<p>
+<code>dh_auto_install</code>: It behaves differently when operating on a
+   single package (it installs under <code>debian/PACKAGE</code> instead of
+   <code>debian/tmp</code>), so make it use <code>debian/tmp</code> in all cases. This way,
+   <code>dh_install</code> has to be used (see below). That also means that a
+   binary package (<em>e.g.</em> a debug package) can be added without
+   changing this part.
+</p>
+</li>
+<li>
+<p>
+<code>dh_install</code>: No point in keeping the <code>.la</code> files. Also, using
+   <code>--fail-missing</code> makes sure every file installed by upstream is
+   installed in some package, or explicitly ignored.
+</p>
+</li>
+<li>
+<p>
+<code>dh_strip</code>: Commented out, there’s only a few drivers shipping a
+   debug package.
+</p>
+</li>
+<li>
+<p>
+<code>dh_shlibdeps</code>: The comment really says it all.
+</p>
+</li>
+<li>
+<p>
+<code>dh</code>: The order is important! We want patching to happen before
+   autoreconfiguring (both <code>quilt</code> and <code>autoreconf</code> insert commands
+   before <code>dh_auto_configure</code>, and after <code>dh_clean</code>). Also, we build
+   out-of-tree. The <code>xsf</code> sequence is explained in the previous part.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>If one needs to build several flavours,
+<a href="http://git.debian.org/?p=pkg-xorg/driver/xserver-xorg-video-fbdev.git;a=blob;f=debian/rules"><code>fbdev</code>’s rules file</a>
+can be used as an example.</p></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_handling_a_transition">Handling a transition</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>When a new major version of the server comes up, it can be updated
+following its <code>README.source</code>. Usually, drivers can be rebuilt using
+binNMUs. Be sure <code>xorg-server</code> is marked as <code>Installed</code> on all
+buildds, or set a <code>dep-wait</code>.</p></div>
+<div class="paragraph"><p>On the release team side, a transition page can be asked for, to track
+fully rebuilt drivers. For the input 12→13 and video 10→11
+transitions, the settings are:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Affected: <code>.build-depends ~ /xserver-xorg-dev/</code>
+</p>
+</li>
+<li>
+<p>
+Good: <code>.depends ~ /xorg-input-abi-13/ | .depends ~ /xorg-video-abi-11/</code>
+</p>
+</li>
+<li>
+<p>
+Bad: <code>.depends ~ /xorg-input-abi-12/ | .depends ~ /xorg-video-abi-10/</code>
+</p>
+</li>
+</ul></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_staying_tuned">Staying tuned</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Staying informed of driver-related changes can be a bit difficult in
+the following cases:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+If one maintains a single driver within the X Strike Force, one
+   might not notice the few mails about drivers in the heavy mail flow
+   on <code>debian-x@</code>.
+</p>
+</li>
+<li>
+<p>
+If one maintains a driver outside the X Strike Force, one is
+   probably not subscribed to the mailing list at all.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>For those reasons, a mail alias is being set up to gather all
+maintainers interested in receiving driver-related mails.</p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated
+ 2016-11-23 07:30:35 UTC
+</div>
+</div>
+</body>
+</html>

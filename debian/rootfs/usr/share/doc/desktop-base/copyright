@@ -1,0 +1,125 @@
+This package was debianized by Colin Walters <walters@debian.org> on
+Tue, 22 Oct 2002 15:05:34 -0400.
+
+
+This package is comprised of bits and pieces from various sources.
+
+
+The two Debian “Open Use” Logos (with and without the “Debian” label) are used
+in various bits of artwork.
+
+The Debian “Open Use” Logo (without the “Debian” label) used to be released
+under the following terms, as stated in:
+https://web.archive.org/web/20120119205807/http://www.debian.org/logos/
+
+    Copyright (c) 1999 Software in the Public Interest
+
+    Permission is hereby granted, free of charge, to any person obtaining a
+    copy of this software and associated documentation files (the "Software"), to
+    deal in the Software without restriction, including without limitation the
+    rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+    sell copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+
+Currently, both Debian “Open Use” Logos (with and without the “Debian” label)
+are released under the terms of the GNU Lesser General Public License,
+version 3 or any later version, as stated in:
+https://www.debian.org/logos/
+
+
+The debian-security.xcf file (and the resulting .png file) are
+Copyright Ulrich Hansen <uhansen@mainz-online.de>, Mainz, Germany, 2010,
+published under GPL2 or higher (at your option)
+They are based on the Debian “Open Use” Logo (without the “Debian” label).
+
+The .desktop files and xml configuration files in this package were compiled by
+desktop-base contributors.
+
+emblems-debian/emblem-debian*.svg are different versions of the Debian
+“Open Use” Logo (without the “Debian” label).
+
+The SDDM QML script is © 2016 David Edmundson and adapted for Debian by
+Aurélien Couderc.
+
+
+The Soft Waves theme is © 2016 Juliette Taka Belin and released under the GPLv2
+or any later version.
+
+The Lines plymouth script is Copyright © 2009 Canonical Ltd.,
+Copyright © 2010-2016 Aurélien Couderc, Copyright © 2014-2016 Juliette Taka
+Belin under the GPLv2 or any later version.
+
+The Lines theme is © 2014 Juliette Taka Belin and released under the GPLv2 or
+any later version.
+
+The Lines theme is based on the Debian “Open Use” Logo (with the “Debian”
+label).
+
+The Lines plymouth script is Copyright © 2009 Canonical Ltd.,
+Copyright © 2010-2014 Aurélien Couderc, Copyright © 2012 Jonathan Carter,
+Copyright © 2014 Juliette Taka Belin under the GPLv2 or any later version.
+
+The Lines KDM script is © 2012 Eshat Cakar, © 2014 Aurélien Couderc under the
+GPLv2 or any later version.
+
+The artwork for the Lines KDM theme is © 2014 Juliette Taka Belin and © 2012
+Eshet Cakar under the GPLv2 or any later version.
+
+The Lines KSplash script is © 2013 Martin Klapetek, © 2014 Aurélien Couderc
+under the GPLv2 or any later version.
+
+The artwork for the Lines KSplash theme is © 2014 Juliette Taka Belin under
+the GPLv2 or any later version and © 2007-2014 from the Oxygen Icon Theme
+contributors under the LGPLv3 or any later version.
+
+The Joy theme is © 2012 Adrien Aubourg and released under the GPLv2 or any
+later version.
+
+The Joy theme is based on the Debian “Open Use” Logo (without the “Debian”
+label).
+
+The Joy plymouth script is Copyright © 2009 Canonical Ltd.,
+Copyright © 2010 Aurélien Couderc and Copyright © 2012 Jonathan Carter under
+the GPLv2 or any later version.
+
+The Joy GDM is © 2012 Paul Tagliamonte GPLv2, with work
+from all the previous authors of that file, and artwork from Adrien Aubourg under
+the GPLv2 or any later version.
+
+The Joy KDM theme is © 2012 Eshat Cakar and © 2010 Roman Shtylman GPLv2
+with artwork from Adrien Aubourg under the GPLv2 or any later version.
+
+The Joy KSplash theme is © 2012 Eshat Cakar, Nuno Pinheiro, Riccardo Iaconelli GPLv2
+with artwork from Adrien Aubourg under the GPLv2 or any later version.
+
+The SpaceFun theme is © 2010 Valessio S. Brito and released under the GPLv2.
+
+The SpaceFun theme is based on the Debian “Open Use” Logo (without the “Debian”
+label).
+
+The Spacefun plymouth script is © 2010 Aurelien Couderc and released under the
+GPLv2 or any later version, using artwork from Valessio S. Brito under the
+GPLv2.
+
+The GPL license (version 2) can be found in plain text format, on Debian
+systems, at /usr/share/common-licenses/GPL-2
+
+The GPL license (version 3) can be found in plain text format, on Debian
+systems, at /usr/share/common-licenses/GPL-3
+
+The LGPL license (version 2.1) can be found in plain text format, on Debian
+systems, at /usr/share/common-licenses/LGPL-2.1
+
+The LGPL license (version 3) can be found in plain text format, on Debian
+systems, at /usr/share/common-licenses/LGPL-3

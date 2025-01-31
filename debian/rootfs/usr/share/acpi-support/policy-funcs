@@ -1,0 +1,78 @@
+. /usr/share/acpi-support/power-funcs
+
+CheckUPowerPolicy() {
+	pidof upowerd > /dev/null
+}
+
+# The (not very aptly named) function CheckPolicy checks if the current X
+# console user is running a power management daemon that handles suspend/resume
+# requests. This is used in various places to determine if we need to handle
+# something ourselves or if we need to pass the info on to a power management
+# daemon (e.g. through a fake key press).
+
+CheckPolicy() {
+	local PMS
+
+	getXconsole
+	PMS="/usr/bin/xfce4-power-manager /usr/bin/mate-power-manager /usr/lib/dalston/dalston-power-applet"
+	pidof -x $PMS > /dev/null ||
+        PowerDevilRunning ||
+	GnomeSettingsDaemonPowerRunning
+}
+
+# Find a DBUS session bus, by looking at the given process' environment and
+# then send a message to that bus. If multiple processes match the given name,
+# the message is sent to all of the buses (and output is simply concatenated.
+DBusSend() {
+	# The process to get the DBUS session address from
+	local PROC_NAME="$1"
+
+	# Parameters for dbus-send
+	local DEST="$2"
+	local DBUS_PATH="$3"
+	local METHOD="$4"
+
+	local DBUS_SESS	
+	getXuser
+	if test "$XUSER" != "" && test -x /usr/bin/dbus-send; then
+		serverpid=$(pgrep -n -u "$XUSER" "$PROC_NAME")
+		if test "$serverpid" != ""; then
+			DBUS_SESS=$(su - "$XUSER" -c "grep -a -z DBUS_SESSION_BUS_ADDRESS /proc/$serverpid/environ || :")
+			if test "$DBUS_SESS" != "" && su - "$XUSER" -s /bin/sh -c "export \"$DBUS_SESS\"; dbus-send --print-reply --dest='$DEST' '$DBUS_PATH' '$METHOD' >/dev/null 2>&1"; then
+				return 0
+			fi
+		fi
+	fi
+}
+
+# Check if systemd-logind will be able to call org.freedesktop.systemd1.Manager
+# interface provided by systemd running as PID 1 or by systemd-shim
+HasLogindAndSystemd1Manager() {
+  pidof -x "/lib/systemd/systemd-logind" > /dev/null &&
+  test -x /usr/bin/dbus-send &&
+  # shutdown.target used as a representative of power management calls class
+  dbus-send --print-reply --system --type=method_call \
+    --dest=org.freedesktop.systemd1 \
+    /org/freedesktop/systemd1 \
+    org.freedesktop.systemd1.Manager.GetUnitFileState string:shutdown.target \
+    > /dev/null 2>&1
+}
+
+# Ask kde if the powerdevil module is loaded
+PowerDevilRunning() {
+	DBusSend kded4 org.kde.kded /kded org.kde.kded.loadedModules | grep -q powerdevil
+}
+
+# gnome-power-manager was integrated into gnome-settings-daemon from version
+# 3.1.4, in a new Power plugin (though the handling of buttons is done in the
+# MediaKeys plugin.
+#
+# gnome-settings-daemon does not export a list of loaded plugins, but
+# fortunately the Power plugin does have its own Dbus interface we can check
+# for (We can't check the MediaKeys plugin, since that has been around for
+# longer).
+GnomeSettingsDaemonPowerRunning() {
+	# only check for gnome-settings- instead of gnome-settings-daemon
+	# because /proc/<pid>/stat only lists the first 15 characters
+	DBusSend gnome-settings- org.gnome.SettingsDaemon /org/gnome/SettingsDaemon/Power org.freedesktop.DBus.Introspectable.Introspect | grep -q 'interface name="org.gnome.SettingsDaemon.Power"'
+}

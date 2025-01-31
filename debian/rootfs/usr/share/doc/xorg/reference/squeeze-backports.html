@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>Backports for squeeze</title>
+<link rel="stylesheet" href="../xsf.css" type="text/css" />
+
+
+<script type="text/javascript" src="../asciidoc-xhtml11.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1><a href="../index.html">XSF</a> / Backports for squeeze</h1>
+<span id="author">Cyril Brulebois</span><br />
+<span id="email"><code>&lt;<a href="mailto:kibi@debian.org">kibi@debian.org</a>&gt;</code></span><br />
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_bird_s_eye_view">Bird’s-eye view</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>If one forgets about libraries and clients, a whole X stack boils down
+to: the server itself, input and video drivers, libdrm, and mesa.</p></div>
+<div class="paragraph"><p>To keep things simple, the idea is to backport all of those to
+<code>squeeze</code> through <code>squeeze-backports</code>, along with some of the
+additional packages which might be involved (like <code>libxfont</code> or
+<code>x11proto-fixes-dev</code>).</p></div>
+<div class="paragraph"><p>The backports were prepared so that it’s possible to upgrade the
+<code>input-all</code> and <code>video-all</code> meta packages on <code>amd64</code> and <code>i386</code>. If
+specific drivers (maintained by the X Strike Force) are wanted,
+requesting them on the <code>debian-backports@</code> / <code>debian-x@</code> mailing lists
+should do the trick. For other drivers, please contact the relevant
+package maintainers.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_instructions">Instructions</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The usual <a href="http://backports-master.debian.org/">backports instructions</a>
+apply. But let’s gather everything in a single place.</p></div>
+<div class="paragraph"><p>Add that to your <code>sources.list</code>:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>deb http://backports.debian.org/debian-backports squeeze-backports main</code></pre>
+</div></div>
+<div class="paragraph"><p>Update your cache:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>apt-get update</code></pre>
+</div></div>
+<div class="paragraph"><p>If you’re interested in just upgrading the usual <code>mesa</code> packages:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>apt-get install -t squeeze-backports libgl1-mesa-dri libgl1-mesa-glx</code></pre>
+</div></div>
+<div class="paragraph"><p>If you want the whole stack, we should distinguish between two
+cases.</p></div>
+<div class="paragraph"><p>In the usual case, both the <code>xserver-xorg-input-all</code> and
+<code>xserver-xorg-video-all</code> meta packages were installed, and pulled a
+lot of packages, which should work for most users.
+Specifying a few packages to upgrade should pull
+everything from <code>squeeze-backports</code>.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>apt-get install -t squeeze-backports xorg xserver-xorg xserver-xorg-core xserver-xorg-input-all xserver-xorg-video-all
+apt-get install -t squeeze-backports libgl1-mesa-dri libgl1-mesa-glx</code></pre>
+</div></div>
+<div class="paragraph"><p>In case only the needed packages were installed, like the <code>synaptics</code>
+input driver and the <code>intel</code> video driver, the following should be
+sufficient:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>apt-get install -t squeeze-backports xorg xserver-xorg xserver-xorg-core xserver-xorg-input-synaptics xserver-xorg-video-intel
+apt-get install -t squeeze-backports libgl1-mesa-dri libgl1-mesa-glx</code></pre>
+</div></div>
+<div class="paragraph"><p>It is probably a very good idea to install the Linux kernel from
+<code>squeeze-backports</code> as well. It is even required for the <code>nouveau</code>
+video driver.</p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated
+ 2016-11-23 07:30:35 UTC
+</div>
+</div>
+</body>
+</html>

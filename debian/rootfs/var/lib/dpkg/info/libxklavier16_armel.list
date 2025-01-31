@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libxklavier.so.16.4.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libxklavier16
+/usr/share/doc/libxklavier16/AUTHORS
+/usr/share/doc/libxklavier16/CREDITS
+/usr/share/doc/libxklavier16/NEWS.gz
+/usr/share/doc/libxklavier16/README
+/usr/share/doc/libxklavier16/changelog.Debian.gz
+/usr/share/doc/libxklavier16/changelog.gz
+/usr/share/doc/libxklavier16/copyright
+/usr/lib/arm-linux-gnueabi/libxklavier.so.16

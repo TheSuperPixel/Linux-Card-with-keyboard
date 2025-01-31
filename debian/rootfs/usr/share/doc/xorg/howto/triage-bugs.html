@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>How to triage bugs</title>
+<link rel="stylesheet" href="../xsf.css" type="text/css" />
+
+
+<script type="text/javascript" src="../asciidoc-xhtml11.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1><a href="../index.html">XSF</a> / How to triage bugs</h1>
+<span id="author">Cyril Brulebois</span><br />
+<span id="email"><code>&lt;<a href="mailto:kibi@debian.org">kibi@debian.org</a>&gt;</code></span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_packaging_bugs_or_upstream_bugs">Packaging bugs or upstream bugs?</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>It’d be nice to get all upstream bugs tagged as such (<code>upstream</code> tag),
+forwarded upstream (which means the bugzilla instance on
+<a href="http://bugs.freedesktop.org/">http://bugs.freedesktop.org/</a> for most packages), and marked as such.</p></div>
+<div class="paragraph"><p>A mail to <code>control@bugs.debian.org</code> would look like:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>tag X upstream
+forwarded X https://bugs.freedesktop.org/show_bug.cgi?id=Y
+thanks</code></pre>
+</div></div>
+<div class="paragraph"><p>Then <a href="http://bts-link.alioth.debian.org/"><code>bts-link</code></a> comes into play
+and helps us tracking upstream status, which is pretty nice to have.</p></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usertags">Usertags</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Another feature of the BTS is usertagging. That lets people keep track
+of additional tags, “attached” to a given mail address. For XSF,
+that’s <code>debian-x@lists.debian.org</code>.</p></div>
+<div class="paragraph"><p>The list of all usertagged bugs can be seen on the following page; the
+list of all used usertags is at the bottom, in the form.<br />
+→ <a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?users=debian-x%40lists.debian.org">http://bugs.debian.org/cgi-bin/pkgreport.cgi?users=debian-x%40lists.debian.org</a></p></div>
+<div class="paragraph"><p>Let’s give some examples:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>i810</code>, <code>i915</code>: helps triaging <code>-video-intel</code> bugs depending on the
+   chipset.
+</p>
+</li>
+<li>
+<p>
+<code>r200</code>, <code>r300</code>: ditto for <code>-video-ati</code>.
+</p>
+</li>
+<li>
+<p>
+<code>xset</code>, <code>xrandr</code>: helps triaging <code>x11-xserver-utils</code> bugs depending
+   on the affected tool (like other <code>x11-*</code> packages, that’s a bundle
+   of teeny tiny apps).
+</p>
+</li>
+<li>
+<p>
+<code>squeeze-candidate</code>: helps keeping a list of bugs we’d like to get
+   fixed in a point release (through a stable update).
+</p>
+</li>
+<li>
+<p>
+<code>needs-forwarding</code>: of course, it’d be nice to have all upstream
+   bugs reported upstream, but some might need special attention
+   (<em>e.g.</em> security bugs).
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Here’s an example of URL, for the last tags:<br />
+→ <a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?users=debian-x%40lists.debian.org&amp;tag=squeeze-candidate">http://bugs.debian.org/cgi-bin/pkgreport.cgi?users=debian-x%40lists.debian.org&amp;tag=squeeze-candidate</a><br />
+→ <a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?users=debian-x%40lists.debian.org&amp;tag=needs-forwarding">http://bugs.debian.org/cgi-bin/pkgreport.cgi?users=debian-x%40lists.debian.org&amp;tag=needs-forwarding</a></p></div>
+<div class="paragraph"><p>By the way one should keep an eye on the list of found/fixed
+versions since those bugs are likely marked as resolved (in <code>unstable</code>
+or <code>experimental</code>), but might still affect a stable release.</p></div>
+<div class="paragraph"><p>To list the bugs marked <code>squeeze-candidate</code> but not
+<code>squeeze-accepted</code>:<br />
+→ <a href="http://bugs.debian.org/cgi-bin/pkgreport.cgi?users=debian-x%40lists.debian.org&amp;tag=squeeze-candidate&amp;exclude=tag:squeeze-accepted">http://bugs.debian.org/cgi-bin/pkgreport.cgi?users=debian-x%40lists.debian.org&amp;tag=squeeze-candidate&amp;exclude=tag:squeeze-accepted</a></p></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_categories">Categories</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The BTS has yet another feature which can help, categories. That’s
+based on usertags as well, but one has to use the package address
+(<code>$package@packages.debian.org</code>), so that’s package-specific rather
+than team-specific.</p></div>
+<div class="paragraph"><p>Categories are
+<a href="http://wiki.debian.org/bugs.debian.org/usertags">documented on the wiki</a>,
+and they would probably be welcome in the <code>intel</code> and <code>ati</code> cases
+above, as well as in the “multiple tools in a single bundle”
+cases… An example of what we could achieve is the
+<a href="http://bugs.debian.org/devscripts">devscripts bug page</a> (it takes
+some time to load, plenty of bugs).</p></div>
+<div class="paragraph"><p>Needed steps for that to happen:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+create usercategories.
+</p>
+</li>
+<li>
+<p>
+move usertags from <code>debian-x@lists.debian.org</code> to
+   <code>$package@packages.debian.org</code>, probably using the <code>bts select</code>
+   command to get the list over which to iterate.
+</p>
+</li>
+<li>
+<p>
+profit!
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>To move the usertags, something like that should do the job:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># Adding usertags:
+user $package1@packages.debian.org
+usertag X xset
+usertag Y xrandr
+user $package2@packages.debian.org
+usertag Z i810
+
+# Removing tags which are no longer needed:
+user debian-x@lists.debian.org
+usertag X - xset
+usertag Y - xrandr
+usertag Z - i810</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated
+ 2016-11-23 07:30:35 UTC
+</div>
+</div>
+</body>
+</html>

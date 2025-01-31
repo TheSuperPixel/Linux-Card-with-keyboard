@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>Handling multiple server versions thanks to experimental</title>
+<link rel="stylesheet" href="../xsf.css" type="text/css" />
+
+
+<script type="text/javascript" src="../asciidoc-xhtml11.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1><a href="../index.html">XSF</a> / Handling multiple server versions thanks to experimental</h1>
+<span id="author">Cyril Brulebois</span><br />
+<span id="email"><code>&lt;<a href="mailto:kibi@debian.org">kibi@debian.org</a>&gt;</code></span><br />
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_context">Context</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>A quick overview of how things work upstream for the server:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Patches get reviewed and merged into the <code>master</code> branch.
+</p>
+</li>
+<li>
+<p>
+After a few release candidates, <code>master</code> gets tagged (say: <code>1.10</code>
+   or <code>1.10.0</code>), and a stable branch (<code>server-1.10-branch</code> in this
+   case) is created to receive bug fixes.
+</p>
+</li>
+<li>
+<p>
+Those bug fixes usually are cherry-picks from commits in the
+   <code>master</code> branch.
+</p>
+</li>
+<li>
+<p>
+This leads to stable bugfix releases: <code>1.10.1</code>, <code>1.10.2</code>, and
+   so on.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>It doesn’t make much sense to try and package <code>master</code> on a continuous
+fashion, since the ABI can be broken multiple times, without a bump
+for the ABI version numbers every time. It’s usually done once a bunch
+of major changes landed, and when things are supposed to be stable
+for a while. On the packaging side, as explained on the
+<a href="dependencies.html">dependencies between server and drivers</a> page,
+a bump means the need for a rebuild of the relevant drivers (input
+and/or video).</p></div>
+<div class="paragraph"><p>That’s why the idea is to concentrate on upstream release candidates
+and official releases. Depending on available developer time (both
+upstream and in Debian), several branches can be developed/maintained
+in parallel, so it can be worth having several versions available in
+parallel, which is where <code>experimental</code> is handy.</p></div>
+<div class="paragraph"><p>Keeping on with this example, with <code>1.9</code> in <code>unstable</code>, release
+candidates for <code>1.10</code> can be uploaded to <code>experimental</code>, along with a
+few drivers so that it’s actually useful.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_selecting_drivers">Selecting drivers</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To avoid repetitive and sometimes pointless work, it’s probably a good
+idea to upload (to <code>experimental</code> as well) only a few drivers built
+against the server in <code>experimental</code>. ABI might be bumped between
+release candidates (that happened between <code>1.10rc3</code> and <code>1.10</code> for
+example), so drivers would need to be rebuilt (even though binNMUs
+might help).</p></div>
+<div class="paragraph"><p>The proposed drivers can be seen on the
+<a href="squeeze-backports.html">backports policy for squeeze</a> page, along
+with a tiny description for each.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_drivers_in_experimental">Building drivers in experimental</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Having a driver in <code>experimental</code> doesn’t change much: It is sufficient
+to declare a build-dependency against <code>xserver-xorg-dev (&gt;=
+$serverminver)</code>, where <code>$serverminver</code> can be seen in:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>debian/serverminver</code> in the <code>xorg-server</code> source package: see its
+   first line.
+</p>
+</li>
+<li>
+<p>
+<code>/usr/share/xserver-xorg/inputdrvdep</code>: see the needed version of
+   <code>xserver-xorg-core</code>.
+</p>
+</li>
+<li>
+<p>
+<code>/usr/share/xserver-xorg/videodrvdep</code>: ditto.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>So, for a given version of a driver in <code>unstable</code>, bumping the
+build-dep version and uploading to <code>experimental</code> should be enough,
+providing it doesn’t require further changes (source code changes are
+sometimes needed to support building against a newer server). When
+that happens, the revision number can be constructed by appending
+<code>+exp1</code>. The idea here is to avoid things like:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>1.42-1</code> to <code>unstable</code>.
+</p>
+</li>
+<li>
+<p>
+<code>1.42-2</code> to <code>experimental</code>: bump the build-dep.
+</p>
+</li>
+<li>
+<p>
+<code>1.42-3</code> to <code>unstable</code>: revert the build-dep bump, add a bugfix.
+</p>
+</li>
+<li>
+<p>
+<code>1.42-4</code> to <code>experimental</code>: build the build-dep again, keep the bugfix.
+</p>
+</li>
+<li>
+<p>
+etc.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Instead, that seems more natural:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>1.42-1</code> to <code>unstable</code>.
+</p>
+</li>
+<li>
+<p>
+<code>1.42-1+exp1</code> to <code>experimental</code>: bump the build-dep.
+</p>
+</li>
+<li>
+<p>
+<code>1.42-2</code> to <code>unstable</code>: add a bugfix to <code>unstable</code>’s version.
+</p>
+</li>
+<li>
+<p>
+<code>1.42-2+exp1</code> to <code>experimental</code>: rebuild against experimental
+   (merging or rebasing the build-dep bump).
+</p>
+</li>
+</ul></div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph"><div class="title">Note</div><p>Remember <code>experimental</code> is special. With the above sequence of
+uploads, if the <code>1.42-2+exp1</code> version isn’t uploaded, the
+<code>1.42-1+exp1</code> upload might disappear from <code>experimental</code> after some
+time, since the version in <code>unstable</code> is more recent: the “obsolete”
+package goes away. That’s why it’s important to remember uploading to
+<code>experimental</code> as well when uploading a new driver to <code>unstable</code>.</p></div>
+</div></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated
+ 2016-11-23 07:30:35 UTC
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/gtk-2.0
+/usr/lib/arm-linux-gnueabi/gtk-2.0/2.10.0
+/usr/lib/arm-linux-gnueabi/gtk-2.0/2.10.0/engines
+/usr/lib/arm-linux-gnueabi/gtk-2.0/2.10.0/engines/libadwaita.so
+/usr/share
+/usr/share/doc
+/usr/share/doc/gnome-themes-standard
+/usr/share/doc/gnome-themes-standard/NEWS.gz
+/usr/share/doc/gnome-themes-standard/README
+/usr/share/doc/gnome-themes-standard/changelog.Debian.gz
+/usr/share/doc/gnome-themes-standard/changelog.gz
+/usr/share/doc/gnome-themes-standard/copyright

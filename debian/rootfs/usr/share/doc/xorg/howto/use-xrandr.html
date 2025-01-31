@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>How to use xrandr</title>
+<link rel="stylesheet" href="../xsf.css" type="text/css" />
+
+
+<script type="text/javascript" src="../asciidoc-xhtml11.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1><a href="../index.html">XSF</a> / How to use xrandr</h1>
+<span id="author">Cyril Brulebois</span><br />
+<span id="email"><code>&lt;<a href="mailto:kibi@debian.org">kibi@debian.org</a>&gt;</code></span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_getting_started">Getting started</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_what_is_xrandr">What is xrandr?</h3>
+<div class="paragraph"><p><code>xrandr</code> is a command-line tool to interact with the X <code>RandR</code>
+extension [see <a href="http://www.x.org/wiki/Projects/XRandR">x.org</a>,
+<a href="http://en.wikipedia.org/wiki/RandR">wikipedia</a>], which allows for
+live (re)configuration of the X server (<em>i.e.</em> without restarting it):
+It provides automatic discovery of modes (resolutions, refresh rates,
+etc.) together with the ability to configure outputs dynamically
+(resize, rotate, move, etc.).</p></div>
+<div class="paragraph"><p><strong>FIXME: Status across drivers?</strong></p></div>
+</div>
+<div class="sect2">
+<h3 id="_what_consequences_for_xorg_conf">What consequences for xorg.conf?</h3>
+<div class="paragraph"><p>Starting with <code>squeeze</code>, removing the <code>xorg.conf</code> configuration file
+entirely should work well enough, but in case that doesn’t work out,
+let’s document what can be removed from it from a <code>RandR</code> point of
+view.</p></div>
+<div class="paragraph"><p>With the driver detecting modes automatically, several configuration
+options become useless most of the time in your configuration file
+(xorg.conf). You might want to remove:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>HorizSync</code> and <code>VertRefresh</code> from the <code>Monitor</code> section.
+</p>
+</li>
+<li>
+<p>
+Modes from <code>Display</code> subsection in <code>Screen</code> section.
+</p>
+</li>
+<li>
+<p>
+<code>ModeLine</code> from the <code>Monitor</code> section.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>There’s also no need to keep static dual-head configuration. Some
+suggestions to get a tiny <code>xorg.conf</code>:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Drop dual <code>Device</code>/<code>Screen</code>/<code>Monitor</code> sections, a single one is
+   needed.
+</p>
+</li>
+<li>
+<p>
+Drop <code>MonitorLayout</code> option and <code>Screen</code> lines from the remaining
+   <code>Device</code> section.
+</p>
+</li>
+<li>
+<p>
+Drop the <code>ServerLayout</code> section(s).
+</p>
+</li>
+<li>
+<p>
+Drop <code>RightOf</code>/<code>LeftOf</code> indication of the remaining <code>Screen</code> line
+   in <code>ServerLayout</code> section.
+</p>
+</li>
+</ul></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_xrandr_usage">Basic xrandr usage</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Once the configuration file (<code>xorg.conf</code>) is removed or updated,
+starting the server should enable some outputs by default. Their
+top-left corners will be at the same part of the image, but their
+modes will probably be different.</p></div>
+<div class="paragraph"><p>All outputs may be configured through <code>xrandr</code>. To see the available
+outputs, just run <code>xrandr</code>:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ xrandr
+Screen 0: minimum 320 x 200, current 1280 x 800, maximum 4096 x 4096
+VGA1 disconnected (normal left inverted right x axis y axis)
+LVDS1 connected 1280x800+0+0 inverted X and Y axis (normal left inverted right x axis y axis) 261mm x 163mm
+   1280x800       59.8*+
+   1024x768       60.0
+   800x600        60.3     56.2
+   640x480        59.9
+DVI1 disconnected (normal left inverted right x axis y axis)
+TV1 disconnected (normal left inverted right x axis y axis)</code></pre>
+</div></div>
+<div class="paragraph"><p>Comments:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+We see 4 outputs: <code>VGA1</code>, <code>LVDS1</code>, <code>DVI1</code>, <code>TV1</code>.
+</p>
+</li>
+<li>
+<p>
+Only the internal panel (<code>LVDS1</code>) is connected and it supports 4
+   modes at 60 Hz, 1 mode at 56 Hz.
+</p>
+</li>
+<li>
+<p>
+The mode marked with a star (<code>*</code>) is the current mode.
+</p>
+</li>
+<li>
+<p>
+The one marked with a plus (<code>+</code>) is the preferred one. Most
+   monitors report a preferred mode to the driver. And the
+   server/driver will generally choose it by default.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p><strong>FIXME: Mention output name conventions?</strong></p></div>
+<div class="paragraph"><p>When manipulating <code>VGA1</code> output properties, you should use:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ xrandr --output VGA1 &lt;options&gt;</code></pre>
+</div></div>
+<div class="sect2">
+<h3 id="_adding_removing_heads_dynamically">Adding/removing heads dynamically</h3>
+<div class="paragraph"><p>The old days where you had to restart X when plugging a new monitor
+are gone. With <code>RandR</code> 1.2, you can plug/unplug monitors whenever you
+want. Running the following line will query all outputs and enable
+them with their default mode:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ xrandr --auto</code></pre>
+</div></div>
+<div class="paragraph"><p>You may also disable one output using:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ xrandr --output LVDS1 --off</code></pre>
+</div></div>
+<div class="paragraph"><p>This may be useful for some buggy application that don’t support
+multiple outputs well. Also, due to CRTC limitations (see the Caveats
+section below), it is often required to disable one output before
+enabling another since most hardware only support 2 at the same time.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_changing_the_mode">Changing the mode</h3>
+<div class="paragraph"><p>With the above <code>xrandr</code> output, you may change the <code>LVDS1</code> mode to
+<code>1024x768</code> using:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ xrandr --output LVDS1 --mode 1024x768</code></pre>
+</div></div>
+<div class="paragraph"><p>The refresh rate may also be changed, either at the same time or
+independently:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ xrandr --output LVDS1 --mode 1024x768 --rate 75
+$ xrandr --output LVDS1 --rate 75</code></pre>
+</div></div>
+<div class="paragraph"><p>To get back to the default mode:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ xrandr --output LVDS1 --auto</code></pre>
+</div></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_placing_outputs_in_a_virtual_screen">Placing outputs in a virtual screen</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_a_bit_of_configuration_for_non_kms_setups">A bit of configuration for non-KMS setups:</h3>
+<div class="paragraph"><p>Let’s have a look at the maximal virtual screen size, we see
+<code>4096x4096</code> in this example:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ xrandr|head -1
+Screen 0: minimum 320 x 200, current 1280 x 800, maximum 4096 x 4096</code></pre>
+</div></div>
+<div class="paragraph"><p>With KMS (<strong>FIXME: Link to a page which explains what KMS is</strong>),
+there&#8217;s no need to specify any <code>Virtual</code> option. With DRI and without
+KMS, that might be needed. Indeed, drivers will often create a default
+virtual screen with small dimensions, for instance <code>1600x1200</code>, to
+reduce memory consumption.</p></div>
+<div class="paragraph"><p>If you plan to use multiple outputs displaying different zones, you
+should configure your <code>xorg.conf</code> by adding a <code>Virtual</code> line to the
+<code>Display</code> subsection in the <code>Screen</code> section.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>Section "Screen"
+  …
+  SubSection "Display"
+    Depth 24
+    Virtual 3000 2000
+  EndSubSection
+EndSection</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_place_outputs">Place outputs</h3>
+<div class="paragraph"><p>Outputs are placed using the following options:
+<code>--right-of</code>/<code>--left-of</code>/<code>--above</code>/<code>--below</code>. For instance, to place
+the <code>VGA1</code> output virtually-right of the internal panel (<code>LVDS1</code>):</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ xrandr --output VGA1 --right-of LVDS1</code></pre>
+</div></div>
+<div class="paragraph"><p>Note that hardware and memory limitations may severely restrict the
+size of your virtual screen, see the Caveats section below.</p></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_new_modes">Adding new modes</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Under some circumstances, some modes might be missing. For instance,
+if the monitor does not report correct EDID information. Or if the
+output didn&#8217;t have a CRTC available at startup because another output
+was using it and you disabled it in the meantime.</p></div>
+<div class="paragraph"><p>If a mode exist, you may add it to one output with:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ xrandr --addmode VGA1 800x600</code></pre>
+</div></div>
+<div class="paragraph"><p>If the mode does not exist, you may first create it by passing a modeline:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>$ xrandr --newmode &lt;ModeLine&gt;</code></pre>
+</div></div>
+<div class="paragraph"><p>You may create a modeline using the <code>gtf</code> or <code>cvt</code> tools (shipped in
+the <code>xserver-xorg-core</code> package).</p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated
+ 2016-11-23 07:30:35 UTC
+</div>
+</div>
+</body>
+</html>

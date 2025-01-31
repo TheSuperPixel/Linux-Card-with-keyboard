@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libx265.so.95
+/usr/share
+/usr/share/doc
+/usr/share/doc/libx265-95
+/usr/share/doc/libx265-95/changelog.Debian.armel.gz
+/usr/share/doc/libx265-95/changelog.Debian.gz
+/usr/share/doc/libx265-95/copyright

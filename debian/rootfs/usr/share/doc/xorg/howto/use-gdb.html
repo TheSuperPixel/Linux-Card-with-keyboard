@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>How to use gdb</title>
+<link rel="stylesheet" href="../xsf.css" type="text/css" />
+
+
+<script type="text/javascript" src="../asciidoc-xhtml11.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1><a href="../index.html">XSF</a> / How to use gdb</h1>
+<span id="author">Cyril Brulebois</span><br />
+<span id="email"><code>&lt;<a href="mailto:kibi@debian.org">kibi@debian.org</a>&gt;</code></span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_foreword">Foreword</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>One should note that X is responsible for VT switching, meaning
+switching between an X session and console terminals. In other words,
+<code>Ctrl+Alt+Fn</code> is handled by X. If X is stopped, for example because
+it’s running under <code>gdb</code>, one can no longer switch to another
+VT. That’s why we’re recommending using a second machine to debug
+X. Nevertheless, here are some instructions to attempt debugging X
+with a single machine.</p></div>
+<div class="sect2">
+<h3 id="_one_machine_approach">One-machine approach</h3>
+<div class="paragraph"><p>This is a <em>post-mortem</em> approach. The idea is to run X with the
+<code>-core</code> option. Once it dies, a core file (<code>/etc/X11/core</code>) is
+generated, and can be loaded from <code>gdb</code>.</p></div>
+<div class="paragraph"><p>Follow these steps:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Getting a core file.
+</p>
+</li>
+<li>
+<p>
+Loading a core file.
+</p>
+</li>
+<li>
+<p>
+Displaying/saving a backtrace.
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_two_machine_approach">Two-machine approach</h3>
+<div class="paragraph"><p>You pay the “need a second machine” price, but that buys you
+interactivity. Just log into the first machine from the second one,
+using <code>ssh</code>.</p></div>
+<div class="paragraph"><p>Follow these steps:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Attaching/Starting X from gdb.
+</p>
+</li>
+<li>
+<p>
+Displaying/saving a backtrace.
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_needed_packages">Needed packages</h3>
+<div class="paragraph"><p>Obviously, <code>gdb</code> is needed; <code>xserver-xorg-core-dbg</code> contains the
+debugging symbols for the server itself. Other needed packages can be
+determined by looking at the backtrace. <strong>FIXME: More info about
+that.</strong></p></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_actual_gdb_work">Actual gdb work</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_getting_a_core_file">Getting a core file</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Using <code>gdm3</code> 3.4.1 and above: uncomment <code>Enable = true</code> in the
+   <code>[debug]</code> section of the <code>/etc/gdm3/daemon.conf</code> file.
+</p>
+</li>
+<li>
+<p>
+Using an older <code>gdm3</code> package: The idea is to tweak the daemon’s
+   <code>LocalXserverCommand</code> setting, adding the <code>-core</code> option. As of
+   <code>gdm3 2.30</code>, the defaults can be found in
+   <code>/usr/share/gdm/gdm.schemas</code>. Sample <code>/etc/gdm3/daemon.conf</code>
+   excerpt:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>[daemon]
+LocalXserverCommand=/usr/bin/Xorg -br -verbose -audit 0 -novtswitch -core</code></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Using <code>kdm</code>: One should look for the <code>ServerArgsLocal</code> variable in
+   the <code>/etc/kde4/kdm/kdmrc</code> file, and add <code>-core</code> there. Example:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>ServerArgsLocal=-br -nolisten tcp -core</code></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Using <code>xdm</code>: It’s sufficient to add <code>-core</code> to the command
+   configured through <code>/etc/X11/xdm/Xservers</code>, for example:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>:0 local /usr/bin/X :0 vt7 -nolisten tcp -core</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_loading_a_core_file">Loading a core file</h3>
+<div class="paragraph"><p>That’s trivial, one just needs to pass both the core file and the path
+to the binary:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># gdb -c /etc/X11/core /usr/bin/Xorg</code></pre>
+</div></div>
+<div class="paragraph"><p>Now <code>gdb</code> is ready to display backtraces.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_attaching_x_from_gdb">Attaching X from gdb</h3>
+<div class="paragraph"><p>The way of starting X doesn’t really matter, as <code>gdb</code> makes it
+possible to attach a running process. If there’s a single X instance
+running, that will do the job:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># gdb attach $(pidof X)
+[---GDB starts---]
+(gdb) handle SIGPIPE nostop
+(gdb) cont</code></pre>
+</div></div>
+<div class="paragraph"><p>If there are several instances, one can use <code>ps aux</code> to determine the
+PID of the appropriate instance (2nd column → <code>$pid</code>), and then attach
+it:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># gdb attach $pid
+[---GDB starts---]
+(gdb) handle SIGPIPE nostop
+(gdb) cont</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_starting_x_from_gdb">Starting X from gdb</h3>
+<div class="paragraph"><p>In case X crashes at start-up, one can start X from <code>gdb</code> in the
+following way. In this example, the only parameter is the display, but
+more parameters can be added.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code># gdb --args Xorg :0
+[---GDB starts---]
+(gdb) handle SIGPIPE nostop
+(gdb) run</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_what_is_sigpipe">What is SIGPIPE?</h3>
+<div class="paragraph"><p><code>SIGPIPE</code> is a signal that can reach the X server quite easily,
+especially when performing a VT switch, or refreshing large parts of
+the screen. That’s why we ask <code>gdb</code> not to stop when such a signal is
+caught, thanks to the <code>handle SIGPIPE nostop</code> command.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_how_to_display_a_backtrace">How to display a backtrace?</h3>
+<div class="paragraph"><p>Once X is crashed, for example because it received a <code>SIGSEGV</code>
+(segmentation fault, usually because of a NULL pointer dereference),
+or a <code>SIGBUS</code>, one gets back to the <code>gdb</code> prompt. One can then request
+a backtrace (<code>bt</code>) or a full backtrace (<code>bt full</code>). The latter is what
+developers are usually interested in, because variable values are also
+available.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>(gdb) bt
+(gdb) bt full</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_how_to_save_a_backtrace">How to save a backtrace?</h3>
+<div class="paragraph"><p>To save a recording of the gdb session to a file (<code>gdb.txt</code> by
+default):</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>(gdb) set logging on</code></pre>
+</div></div>
+<div class="paragraph"><p>To save in a different file, use this instead:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>(gdb) set logging file my-file.txt
+(gdb) set logging on</code></pre>
+</div></div>
+<div class="paragraph"><p>Once logging is enabled, you can request a (full) backtrace using the
+previous commands.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated
+ 2016-11-23 07:30:35 UTC
+</div>
+</div>
+</body>
+</html>

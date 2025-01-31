@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>General FAQ</title>
+<link rel="stylesheet" href="../xsf.css" type="text/css" />
+
+
+<script type="text/javascript" src="../asciidoc-xhtml11.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1><a href="../index.html">XSF</a> / General FAQ</h1>
+<span id="author">Cyril Brulebois</span><br />
+<span id="email"><code>&lt;<a href="mailto:kibi@debian.org">kibi@debian.org</a>&gt;</code></span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_input_drivers">Input drivers</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+<em>How do I configure input for X?</em><br />
+   Look at the <a href="../howto/configure-input.html">how to configure input</a> documentation.
+</p>
+</li>
+<li>
+<p>
+<em>Why can’t I kill X through <code>Ctrl+Alt+Backspace</code>?</em><br />
+   That’s explained in the above-mentioned documentation.
+</p>
+</li>
+</ul></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_video_drivers">Video drivers</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_all_drivers">All drivers</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>What’s wrong with the DPI setting?</em><br />
+   By the default, the X server uses 96 DPI, as seen on upstream bug
+   <a href="https://bugs.freedesktop.org/show_bug.cgi?id=23705">#23705</a> (in
+   particular
+   <a href="https://bugs.freedesktop.org/show_bug.cgi?id=23705#c6">Keith’s comment</a>). A
+   particular DPI setting can be set through desktop environment’s
+   preferences, through the <code>-dpi</code> X server command line option (see
+   <code>Xserver</code>’s manual page), or through <code>xrandr</code>’s <code>--dpi</code> option.
+</p>
+</li>
+<li>
+<p>
+<em>How do I get some info about 3D support?</em><br />
+   Look at the <a href="../howto/build-mesa.html">instructions to build mesa</a>,
+   there are a few commands to learn about 3D support, the current driver,
+   etc.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_ati_driver">Ati driver</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>Why is it I’m getting low performances, or even crashes?</em><br />
+   Make sure you have installed the
+   <a href="http://packages.debian.org/firmware-linux&amp;exact=1"><code>firmware-linux</code>
+   package</a>.  The driver might still be working without the firmware,
+   but using code paths which aren’t supported as well as the “normal”
+   ones.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_intel_driver">Intel driver</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>Why isn’t it working?</em><br />
+   KMS is mandatory, as documented in its <code>README.Debian</code> (view it
+   online:
+   <a href="http://git.debian.org/?p=pkg-xorg/driver/xserver-xorg-video-intel.git;a=blob;f=debian/README.Debian">git.debian.org</a>). You
+   probably disabled KMS or didn’t include it in your kernel
+   configuration if you’re using a custom kernel.
+</p>
+</li>
+<li>
+<p>
+<em>X is crashing all the time with my “old” Intel card. What can I do?</em><br />
+   Unfortunately, old cards are not very well supported, and you can’t
+   do much more than switching to a generic driver, like <code>fbdev</code> or
+   <code>vesa</code>, as documented in <code>README.Debian</code> (view it online:
+   <a href="http://git.debian.org/?p=pkg-xorg/driver/xserver-xorg-video-intel.git;a=blob;f=debian/README.Debian">git.debian.org</a>). Please
+   note that you need to disable <code>KMS</code> if you want to use the <code>vesa</code>
+   driver. A minimal <code>xorg.conf</code> would look like:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>Section "Device"
+    Identifier "MyBuggyCard"
+    Driver     "fbdev"
+EndSection</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="_nouveau_driver">Nouveau driver</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>Why isn’t it working?</em><br />
+   Since it’s still considered experimental by its authors, the
+   interfaces aren’t stable yet, so the driver has particular
+   dependencies on the kernel, which are documented in <code>README.Debian</code>
+   (view it online:
+   <a href="http://git.debian.org/?p=pkg-xorg/driver/xserver-xorg-video-nouveau.git;a=blob;f=debian/README.Debian;h=27ced6b1bf5102a5b72525318439efdfb330745d;hb=6c2f12ca18f55b55d49e083d86d87d970ce53a07">for squeeze</a>,
+   <a href="http://git.debian.org/?p=pkg-xorg/driver/xserver-xorg-video-nouveau.git;a=blob;f=debian/README.Debian">for sid</a>).
+</p>
+</li>
+</ul></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_others">Others</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_session_management">Session management</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>How to start a bare X session (without Gnome, KDE, etc.)?</em><br />
+   Assuming there’s no X running on the <code>:1</code> display, run this from a
+   VT:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>startx /usr/bin/xterm -- :1</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated
+ 2016-11-23 07:30:35 UTC
+</div>
+</div>
+</body>
+</html>

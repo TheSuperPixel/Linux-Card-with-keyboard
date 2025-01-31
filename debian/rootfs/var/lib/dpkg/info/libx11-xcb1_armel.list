@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libX11-xcb.so.1.0.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libx11-xcb1
+/usr/share/doc/libx11-xcb1/changelog.Debian.gz
+/usr/share/doc/libx11-xcb1/changelog.gz
+/usr/share/doc/libx11-xcb1/copyright
+/usr/lib/arm-linux-gnueabi/libX11-xcb.so.1

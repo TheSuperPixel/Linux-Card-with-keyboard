@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libchromaprint.so.1.4.2
+/usr/share
+/usr/share/doc
+/usr/share/doc/libchromaprint1
+/usr/share/doc/libchromaprint1/changelog.Debian.gz
+/usr/share/doc/libchromaprint1/changelog.gz
+/usr/share/doc/libchromaprint1/copyright
+/usr/lib/arm-linux-gnueabi/libchromaprint.so.1

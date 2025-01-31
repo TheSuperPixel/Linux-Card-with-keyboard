@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libxt6
+/usr/share/doc/libxt6/changelog.Debian.gz
+/usr/share/doc/libxt6/changelog.gz
+/usr/share/doc/libxt6/copyright
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libXt.so.6.0.0
+/usr/lib/arm-linux-gnueabi/libXt.so.6

@@ -1,0 +1,231 @@
+#!/bin/sh
+set -e
+
+# Tag to allow some debhelper commands to inject relevant code
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/default/kdm.d/10_desktop-base 9.0.0~ desktop-base -- "$@"
+# End automatically added section
+
+
+if [ "${1}" = "configure" ] && [ ! -z "${2}" ]; then
+    if dpkg --compare-versions ${2} le "9.0.0~exp1"; then
+        # Try remove folder if empty, left after 9.0.0~exp1 conf suppression
+        # by debhelper conffile handling
+        OLD_KDM_DIR=/etc/default/kdm.d
+        if [ -d ${OLD_KDM_DIR} ] ; then
+            echo "Removing old KDM configuration directory \"${OLD_KDM_DIR}\""
+            rmdir ${OLD_KDM_DIR} || true
+        fi
+    fi
+fi
+
+if [ "$1" = "configure" ] || [ "$1" = "abort-upgrade" ] || [ "$1" = "abort-remove" ]; then
+    # Theme package alternatives
+    while read theme priority; do
+        update-alternatives --install \
+            /usr/share/desktop-base/active-theme \
+            desktop-theme \
+            /usr/share/desktop-base/$theme-theme $priority
+    done << EOF
+softwaves 50
+lines 40
+joy 30
+joy-inksplat 30
+spacefun 30
+EOF
+
+    # Use active theme as highest priority for background
+    active_background=/usr/share/desktop-base/active-theme/wallpaper/contents/images/1920x1080.svg
+    if [ -e ${active_background} ]; then
+        update-alternatives --install \
+            /usr/share/images/desktop-base/desktop-background \
+            desktop-background ${active_background} 70
+    fi
+    # Alternatives for the background in theme packages
+    while read theme filename priority; do
+        update-alternatives --install \
+            /usr/share/images/desktop-base/desktop-background \
+            desktop-background \
+            /usr/share/desktop-base/$theme-theme/wallpaper/contents/images/$filename $priority
+    done << EOF
+softwaves 1024x768.svg 65
+softwaves 1280x720.svg 65
+softwaves 1280x800.svg 65
+softwaves 1280x1024.svg 65
+softwaves 1600x1200.svg 65
+softwaves 1920x1080.svg 65
+softwaves 1920x1200.svg 65
+softwaves 2560x1440.svg 65
+softwaves 2560x1600.svg 65
+lines 1280x1024.svg 60
+lines 1600x1200.svg 60
+lines 1920x1080.svg 60
+lines 1920x1200.svg 60
+lines 2560x1080.svg 60
+joy 1280x720.svg 50
+joy 1280x1024.svg 50
+joy 1600x1200.svg 50
+joy 1920x1080.svg 50
+joy 1920x1200.svg 50
+joy-inksplat 1280x720.svg 50
+joy-inksplat 1280x1024.svg 50
+joy-inksplat 1600x1200.svg 50
+joy-inksplat 1920x1080.svg 50
+joy-inksplat 1920x1200.svg 50
+spacefun 1280x720.svg 50
+spacefun 1280x1024.svg 50
+spacefun 1920x1080.svg 50
+spacefun 1920x1200.svg 50
+EOF
+
+    # Set up an alternative for the XML version of the background
+    # (for GNOME)
+    # Highest priority for active theme
+    active_background_xml=/usr/share/desktop-base/active-theme/wallpaper/gnome-background.xml
+    if [ -e ${active_background_xml} ]; then
+        update-alternatives --install \
+            /usr/share/images/desktop-base/desktop-background.xml \
+            desktop-background.xml ${active_background_xml} 50
+    fi
+    # Alternatives for theme packages
+    while read theme priority; do
+        update-alternatives --install \
+            /usr/share/images/desktop-base/desktop-background.xml \
+            desktop-background.xml \
+            /usr/share/desktop-base/$theme-theme/wallpaper/gnome-background.xml $priority
+    done << EOF
+softwaves 40
+lines 30
+joy 20
+joy-inksplat 20
+spacefun 20
+EOF
+
+    # Set up an alternative for the XML version of the lock screen
+    # (for GNOME)
+    # Highest priority for active theme
+    active_lockscreen=/usr/share/desktop-base/active-theme/lockscreen/gnome-background.xml
+    if [ -e ${active_lockscreen} ]; then
+        update-alternatives --install \
+            /usr/share/images/desktop-base/desktop-lockscreen.xml \
+            desktop-lockscreen.xml ${active_lockscreen} 50
+    fi
+    # Alternatives for theme packages
+    while read theme priority; do
+        update-alternatives --install \
+            /usr/share/images/desktop-base/desktop-lockscreen.xml \
+            desktop-lockscreen.xml \
+            /usr/share/desktop-base/$theme-theme/lockscreen/gnome-background.xml $priority
+    done << EOF
+softwaves 40
+lines 30
+joy 20
+spacefun 20
+EOF
+
+    # Set up an alternative for the wallpaper for Plasma 5/KDE
+    # Highest priority for active theme
+    active_plasma_wallpaper=/usr/share/desktop-base/active-theme/wallpaper
+    if [ -e ${active_plasma_wallpaper} ]; then
+        update-alternatives --install \
+            /usr/share/wallpapers/DebianTheme \
+            desktop-plasma5-wallpaper ${active_plasma_wallpaper} 50
+    fi
+    # Alternatives for theme packages
+    while read theme priority; do
+        update-alternatives --install \
+            /usr/share/wallpapers/DebianTheme \
+            desktop-plasma5-wallpaper \
+            /usr/share/desktop-base/$theme-theme/wallpaper $priority
+    done << EOF
+softwaves 40
+lines 30
+joy 20
+joy-inksplat 20
+spacefun 20
+EOF
+
+    # Login theme
+    # Highest priority for active theme
+    active_login_background=/usr/share/desktop-base/active-theme/login/background.svg
+    if [ -e ${active_login_background} ]; then
+        update-alternatives --install /usr/share/images/desktop-base/login-background.svg \
+            desktop-login-background ${active_login_background} 50
+    fi
+    # Alternatives for theme packages
+    while read theme background priority; do
+        update-alternatives --install /usr/share/images/desktop-base/login-background.svg \
+            desktop-login-background \
+            /usr/share/desktop-base/$theme-theme/login/$background $priority
+    done << EOF
+softwaves background.svg 40
+lines background.svg 30
+lines background-nologo.svg 30
+joy background.svg 20
+spacefun background.svg 20
+EOF
+
+    # Set up an alternative for the GRUB background/colors config
+    # Highest priority for active theme
+    ## Favor widescreen / hi-res background for efi installations
+    num_grub_efi_installed=$(dpkg-query --list "grub-efi*" 2> /dev/null | grep "^i" | wc -l)
+    if [ $num_grub_efi_installed -gt 0 ] ; then
+        grub_first_ratio="16x9"
+        grub_second_ratio="4x3"
+    else
+        grub_first_ratio="4x3"
+        grub_second_ratio="16x9"
+    fi
+    active_grub_background=/usr/share/desktop-base/active-theme/grub/grub_background.sh
+    active_grub_first_ratio=/usr/share/desktop-base/active-theme/grub/grub-${grub_first_ratio}.png
+    if [ -e ${active_grub_first_ratio} ] && [ -e ${active_grub_background} ]; then
+        update-alternatives --install \
+            /usr/share/images/desktop-base/desktop-grub.png \
+            desktop-grub ${active_grub_first_ratio} 50 \
+            --slave /usr/share/desktop-base/grub_background.sh \
+            desktop-grub.sh ${active_grub_background}
+    fi
+    active_grub_second_ratio=/usr/share/desktop-base/active-theme/grub/grub-${grub_second_ratio}.png
+    if [ -e ${active_grub_second_ratio} ] && [ -e ${active_grub_background} ]; then
+        update-alternatives --install \
+            /usr/share/images/desktop-base/desktop-grub.png \
+            desktop-grub ${active_grub_second_ratio} 45 \
+            --slave /usr/share/desktop-base/grub_background.sh \
+            desktop-grub.sh ${active_grub_background}
+    fi
+    # Alternatives for theme packages
+    while read theme ratio priority; do
+        update-alternatives --install /usr/share/images/desktop-base/desktop-grub.png \
+            desktop-grub \
+            /usr/share/desktop-base/$theme-theme/grub/grub-$ratio.png $priority \
+            --slave /usr/share/desktop-base/grub_background.sh \
+            desktop-grub.sh \
+            /usr/share/desktop-base/$theme-theme/grub/grub_background.sh
+    done << EOF
+softwaves 4x3 40
+softwaves 16x9 40
+lines 4x3 30
+lines 16x9 30
+joy 4x3 30
+joy 16x9 30
+spacefun 4x3 30
+spacefun 16x9 30
+EOF
+
+    # Apply GRUB background update into /boot
+    if which update-grub > /dev/null ; then
+        # Ensure the background image file has actually been written to disc
+        # before updating.
+        sync
+        # Report success whatever grub return status. This is needed at least
+        # in live systems fon installation to succeed (see #850601).
+        # Until we find a better solution like detecting we’re in a live image
+        # and not calling update-grub at all.
+        update-grub || echo "Updating grub failed, report success anyway!"
+    fi
+
+    if which update-initramfs > /dev/null; then
+        update-initramfs -u
+    fi
+
+fi

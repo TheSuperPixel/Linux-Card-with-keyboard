@@ -1,0 +1,417 @@
+Name: adduser/homedir-permission
+Template: adduser/homedir-permission
+Value: true
+Owners: adduser
+
+Name: adduser/title
+Template: adduser/title
+Owners: adduser
+
+Name: base-passwd/group-add
+Template: base-passwd/group-add
+Owners: base-passwd
+
+Name: base-passwd/group-change-gid
+Template: base-passwd/group-change-gid
+Owners: base-passwd
+
+Name: base-passwd/group-move
+Template: base-passwd/group-move
+Owners: base-passwd
+
+Name: base-passwd/group-remove
+Template: base-passwd/group-remove
+Owners: base-passwd
+
+Name: base-passwd/user-add
+Template: base-passwd/user-add
+Owners: base-passwd
+
+Name: base-passwd/user-change-gecos
+Template: base-passwd/user-change-gecos
+Owners: base-passwd
+
+Name: base-passwd/user-change-gid
+Template: base-passwd/user-change-gid
+Owners: base-passwd
+
+Name: base-passwd/user-change-home
+Template: base-passwd/user-change-home
+Owners: base-passwd
+
+Name: base-passwd/user-change-shell
+Template: base-passwd/user-change-shell
+Owners: base-passwd
+
+Name: base-passwd/user-change-uid
+Template: base-passwd/user-change-uid
+Owners: base-passwd
+
+Name: base-passwd/user-move
+Template: base-passwd/user-move
+Owners: base-passwd
+
+Name: base-passwd/user-remove
+Template: base-passwd/user-remove
+Owners: base-passwd
+
+Name: dash/sh
+Template: dash/sh
+Value: true
+Owners: dash
+Flags: seen
+
+Name: debconf-apt-progress/info
+Template: debconf-apt-progress/info
+Owners: debconf
+
+Name: debconf-apt-progress/media-change
+Template: debconf-apt-progress/media-change
+Owners: debconf
+
+Name: debconf-apt-progress/preparing
+Template: debconf-apt-progress/preparing
+Owners: debconf
+
+Name: debconf-apt-progress/title
+Template: debconf-apt-progress/title
+Owners: debconf
+
+Name: debconf/frontend
+Template: debconf/frontend
+Value: Dialog
+Owners: debconf
+
+Name: debconf/priority
+Template: debconf/priority
+Value: high
+Owners: debconf
+
+Name: debian-installer/console-setup-udeb/title
+Template: debian-installer/console-setup-udeb/title
+Owners: keyboard-configuration
+
+Name: fontconfig/enable_bitmaps
+Template: fontconfig/enable_bitmaps
+Value: false
+Owners: fontconfig-config
+
+Name: fontconfig/hinting_type
+Template: fontconfig/hinting_type
+Value: Native
+Owners: fontconfig-config
+
+Name: fontconfig/subpixel_rendering
+Template: fontconfig/subpixel_rendering
+Value: Automatic
+Owners: fontconfig-config
+
+Name: glibc/disable-screensaver
+Template: glibc/disable-screensaver
+Owners: libc6, libc6:armel
+
+Name: glibc/kernel-not-supported
+Template: glibc/kernel-not-supported
+Owners: libc6, libc6:armel
+
+Name: glibc/kernel-too-old
+Template: glibc/kernel-too-old
+Owners: libc6, libc6:armel
+
+Name: glibc/restart-failed
+Template: glibc/restart-failed
+Owners: libc6, libc6:armel
+
+Name: glibc/restart-services
+Template: glibc/restart-services
+Owners: libc6, libc6:armel
+
+Name: glibc/upgrade
+Template: glibc/upgrade
+Owners: libc6, libc6:armel
+
+Name: keyboard-configuration/altgr
+Template: keyboard-configuration/altgr
+Value: The default for the keyboard layout
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/compose
+Template: keyboard-configuration/compose
+Value: No compose key
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/ctrl_alt_bksp
+Template: keyboard-configuration/ctrl_alt_bksp
+Value: false
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/layout
+Template: keyboard-configuration/layout
+Value: Chinese
+Owners: keyboard-configuration
+Flags: seen
+Variables:
+ CHOICES = Afghani, Albanian, Amharic, Arabic, Arabic (Morocco), Arabic (Syria), Armenian, Azerbaijani, Bambara, Belarusian, Belgian, Berber (Algeria\, Latin characters), Bosnian, Braille, Bulgarian, Burmese, Chinese, Croatian, Czech, Danish, Dhivehi, Dutch, Dzongkha, English (Australian), English (Cameroon), English (Ghana), English (Nigeria), English (South Africa), English (UK), English (US), Esperanto, Estonian, Faroese, Filipino, Finnish, French, French (Canada), French (Democratic Republic of the Congo), French (Guinea), French (Togo), Georgian, German, German (Austria), German (Switzerland), Greek, Hebrew, Hungarian, Icelandic, Indian, Indonesian (Jawi), Iraqi, Irish, Italian, Japanese, Japanese (PC-98xx Series), Kazakh, Khmer (Cambodia), Korean, Kyrgyz, Lao, Latvian, Lithuanian, Macedonian, Malay (Jawi), Maltese, Maori, Moldavian, Mongolian, Montenegrin, Nepali, Norwegian, Persian, Polish, Portuguese, Portuguese (Brazil), Romanian, Russian, Serbian, Sinhala (phonetic), Slovak, Slovenian, Spanish, Spanish (Latin American), Swahili (Kenya), Swahili (Tanzania), Swedish, Taiwanese, Tajik, Thai, Tswana, Turkish, Turkmen, Ukrainian, Urdu (Pakistan), Uzbek, Vietnamese, Wolof
+
+Name: keyboard-configuration/layoutcode
+Template: keyboard-configuration/layoutcode
+Value: cn
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/model
+Template: keyboard-configuration/model
+Value: Generic 105-key (Intl) PC
+Owners: keyboard-configuration
+Variables:
+ CHOICES = A4Tech KB-21, A4Tech KBS-8, A4Tech Wireless Desktop RFKB-23, Acer AirKey V, Acer C300, Acer Ferrari 4000, Acer Laptop, Advance Scorpius KI, Amiga, Apple, Apple Aluminium Keyboard (ANSI), Apple Aluminium Keyboard (ISO), Apple Aluminium Keyboard (JIS), Apple Laptop, Asus Laptop, Atari TT, Azona RF2300 wireless Internet Keyboard, BTC 5090, BTC 5113RF Multimedia, BTC 5126T, BTC 6301URF, BTC 9000, BTC 9000A, BTC 9001AH, BTC 9019U, BTC 9116U Mini Wireless Internet and Gaming, BenQ X-Touch, BenQ X-Touch 730, BenQ X-Touch 800, Brother Internet Keyboard, Cherry B.UNLIMITED, Cherry Blue Line CyBo@rd, Cherry Blue Line CyBo@rd (alternate option), Cherry CyBo@rd USB-Hub, Cherry CyMotion Expert, Cherry CyMotion Master Linux, Cherry CyMotion Master XPress, Chicony Internet Keyboard, Chicony KB-9885, Chicony KU-0108, Chicony KU-0420, Classmate PC, Compaq Easy Access Keyboard, Compaq Internet Keyboard (13 keys), Compaq Internet Keyboard (18 keys), Compaq Internet Keyboard (7 keys), Compaq iPaq Keyboard, Creative Desktop Wireless 7000, DTK2000, Dell, Dell 101-key PC, Dell Laptop/notebook Inspiron 6xxx/8xxx, Dell Laptop/notebook Precision M series, Dell Latitude series laptop, Dell Precision M65, Dell SK-8125, Dell SK-8135, Dell USB Multimedia Keyboard, Dexxa Wireless Desktop Keyboard, Diamond 9801 / 9802 series, Ennyah DKB-1008, Everex STEPnote, FL90, Fujitsu-Siemens Computers AMILO laptop, Generic 101-key PC, Generic 102-key (Intl) PC, Generic 104-key PC, Generic 105-key (Intl) PC, Genius Comfy KB-12e, Genius Comfy KB-16M / Genius MM Keyboard KWD-910, Genius Comfy KB-21e-Scroll, Genius KB-19e NB, Genius KKB-2050HS, Gyration, HTC Dream, Happy Hacking Keyboard, Happy Hacking Keyboard for Mac, Hewlett-Packard Internet Keyboard, Hewlett-Packard Mini 110 Notebook, Hewlett-Packard Omnibook 500 FA, Hewlett-Packard Omnibook 5xx, Hewlett-Packard Omnibook 6000/6100, Hewlett-Packard Omnibook XE3 GC, Hewlett-Packard Omnibook XE3 GF, Hewlett-Packard Omnibook XT1000, Hewlett-Packard Pavilion ZT11xx, Hewlett-Packard Pavilion dv5, Hewlett-Packard SK-250x Multimedia Keyboard, Hewlett-Packard nx9020, Honeywell Euroboard, Htc Dream phone, IBM Rapid Access, IBM Rapid Access II, IBM Space Saver, IBM ThinkPad 560Z/600/600E/A22E, IBM ThinkPad R60/T60/R61/T61, IBM ThinkPad Z60m/Z60t/Z61m/Z61t, Keytronic FlexPro, Kinesis, Laptop/notebook Compaq (eg. Armada) Laptop Keyboard, Laptop/notebook Compaq (eg. Presario) Internet Keyboard, Laptop/notebook eMachines m68xx, Logitech Access Keyboard, Logitech Cordless Desktop, Logitech Cordless Desktop (alternate option), Logitech Cordless Desktop EX110, Logitech Cordless Desktop LX-300, Logitech Cordless Desktop Navigator, Logitech Cordless Desktop Optical, Logitech Cordless Desktop Pro (alternate option 2), Logitech Cordless Desktop iTouch, Logitech Cordless Freedom/Desktop Navigator, Logitech G15 extra keys via G15daemon, Logitech Generic Keyboard, Logitech Internet 350 Keyboard, Logitech Internet Keyboard, Logitech Internet Navigator Keyboard, Logitech Media Elite Keyboard, Logitech Ultra-X Cordless Media Desktop Keyboard, Logitech Ultra-X Keyboard, Logitech diNovo Edge Keyboard, Logitech diNovo Keyboard, Logitech iTouch, Logitech iTouch Cordless Keyboard (model Y-RB6), Logitech iTouch Internet Navigator Keyboard SE, Logitech iTouch Internet Navigator Keyboard SE (USB), MacBook/MacBook Pro, MacBook/MacBook Pro (Intl), Macintosh, Macintosh Old, Memorex MX1998, Memorex MX2500 EZ-Access Keyboard, Memorex MX2750, Microsoft Comfort Curve Keyboard 2000, Microsoft Internet Keyboard, Microsoft Internet Keyboard Pro\, Swedish, Microsoft Natural, Microsoft Natural Ergonomic Keyboard 4000, Microsoft Natural Keyboard Elite, Microsoft Natural Keyboard Pro / Microsoft Internet Keyboard Pro, Microsoft Natural Keyboard Pro OEM, Microsoft Natural Keyboard Pro USB / Microsoft Internet Keyboard Pro, Microsoft Natural Wireless Ergonomic Keyboard 7000, Microsoft Office Keyboard, Microsoft Wireless Multimedia Keyboard 1.0A, Northgate OmniKey 101, OLPC, Ortek MCK-800 MM/Internet keyboard, PC-98xx Series, Propeller Voyager (KTEZ-1000), QTronix Scorpius 98N+, SILVERCREST Multimedia Wireless Keyboard, SK-1300, SK-2500, SK-6200, SK-7100, SVEN Ergonomic 2500, SVEN Slim 303, Samsung SDM 4500P, Samsung SDM 4510P, Sanwa Supply SKB-KG3, Sun Type 4, Sun Type 5, Sun Type 6 (Japanese layout), Sun Type 6 USB (Japanese layout), Sun Type 6 USB (Unix layout), Sun Type 6/7 USB, Sun Type 6/7 USB (European layout), Sun Type 7 USB, Sun Type 7 USB (European layout), Sun Type 7 USB (Japanese layout) / Japanese 106-key, Sun Type 7 USB (Unix layout), Super Power Multimedia Keyboard, Symplon PaceBook (tablet PC), Targa Visionary 811, Toshiba Satellite S3000, Truly Ergonomic Computer Keyboard Model 227 (Wide Alt keys), Truly Ergonomic Computer Keyboard Model 229 (Standard sized Alt keys\, additional Super and Menu key), Trust Direct Access Keyboard, Trust Slimline, Trust Wireless Keyboard Classic, TypeMatrix EZ-Reach 2020, TypeMatrix EZ-Reach 2030 PS2, TypeMatrix EZ-Reach 2030 USB, TypeMatrix EZ-Reach 2030 USB (102/105:EU mode), TypeMatrix EZ-Reach 2030 USB (106:JP mode), Unitek KB-1925, ViewSonic KU-306 Internet Keyboard, Winbook Model XP5, Yahoo! Internet Keyboard
+
+Name: keyboard-configuration/modelcode
+Template: keyboard-configuration/modelcode
+Value: pc105
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/optionscode
+Template: keyboard-configuration/optionscode
+Value: 
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/other
+Template: keyboard-configuration/other
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/store_defaults_in_debconf_db
+Template: keyboard-configuration/store_defaults_in_debconf_db
+Value: true
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/switch
+Template: keyboard-configuration/switch
+Value: No temporary switch
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/toggle
+Template: keyboard-configuration/toggle
+Value: No toggling
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/unsupported_config_layout
+Template: keyboard-configuration/unsupported_config_layout
+Value: true
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/unsupported_config_options
+Template: keyboard-configuration/unsupported_config_options
+Value: true
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/unsupported_layout
+Template: keyboard-configuration/unsupported_layout
+Value: true
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/unsupported_options
+Template: keyboard-configuration/unsupported_options
+Value: true
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/variant
+Template: keyboard-configuration/variant
+Value: Chinese
+Owners: keyboard-configuration
+Flags: seen
+Variables:
+ CHOICES = Chinese, Chinese - Tibetan, Chinese - Tibetan (with ASCII numerals), Chinese - Uyghur, Other
+
+Name: keyboard-configuration/variantcode
+Template: keyboard-configuration/variantcode
+Value: 
+Owners: keyboard-configuration
+
+Name: keyboard-configuration/xkb-keymap
+Template: keyboard-configuration/xkb-keymap
+Value: us
+Owners: keyboard-configuration
+
+Name: libpam-modules/disable-screensaver
+Template: libpam-modules/disable-screensaver
+Owners: libpam-modules
+
+Name: libpam-runtime/conflicts
+Template: libpam-runtime/conflicts
+Owners: libpam-runtime
+
+Name: libpam-runtime/no_profiles_chosen
+Template: libpam-runtime/no_profiles_chosen
+Owners: libpam-runtime
+
+Name: libpam-runtime/override
+Template: libpam-runtime/override
+Value: false
+Owners: libpam-runtime
+
+Name: libpam-runtime/profiles
+Template: libpam-runtime/profiles
+Value: unix, systemd
+Owners: libpam-runtime
+Variables:
+ profile_names = unix, systemd
+ profiles = Unix authentication, Register user sessions in the systemd control group hierarchy
+
+Name: libpam-runtime/title
+Template: libpam-runtime/title
+Owners: libpam-runtime
+
+Name: libpam0g/restart-failed
+Template: libpam0g/restart-failed
+Owners: libpam0g:armel
+
+Name: libpam0g/restart-services
+Template: libpam0g/restart-services
+Owners: libpam0g:armel
+
+Name: libpam0g/xdm-needs-restart
+Template: libpam0g/xdm-needs-restart
+Owners: libpam0g:armel
+
+Name: libraries/restart-without-asking
+Template: libraries/restart-without-asking
+Owners: libc6, libc6:armel, libpam0g:armel
+
+Name: libssl1.0.2/restart-failed
+Template: libssl1.0.2/restart-failed
+Owners: libssl1.0.2:armel
+
+Name: libssl1.0.2/restart-services
+Template: libssl1.0.2/restart-services
+Owners: libssl1.0.2:armel
+
+Name: libssl1.1/restart-failed
+Template: libssl1.1/restart-failed
+Owners: libssl1.1:armel
+
+Name: libssl1.1/restart-services
+Template: libssl1.1/restart-services
+Owners: libssl1.1:armel
+
+Name: lightdm/daemon_name
+Template: lightdm/daemon_name
+Owners: lightdm
+
+Name: openssh-server/permit-root-login
+Template: openssh-server/permit-root-login
+Owners: openssh-server
+
+Name: shared/default-x-display-manager
+Template: shared/default-x-display-manager
+Value: lightdm
+Owners: lightdm
+Flags: seen
+Variables:
+ choices = lightdm
+
+Name: tasksel/desktop
+Template: tasksel/desktop
+Owners: tasksel
+
+Name: tasksel/first
+Template: tasksel/first
+Owners: tasksel
+
+Name: tasksel/tasks
+Template: tasksel/tasks
+Owners: tasksel
+
+Name: tasksel/title
+Template: tasksel/title
+Owners: tasksel
+
+Name: tzdata/Areas
+Template: tzdata/Areas
+Value: Etc
+Owners: tzdata
+Flags: seen
+
+Name: tzdata/Zones/Africa
+Template: tzdata/Zones/Africa
+Owners: tzdata
+
+Name: tzdata/Zones/America
+Template: tzdata/Zones/America
+Owners: tzdata
+
+Name: tzdata/Zones/Antarctica
+Template: tzdata/Zones/Antarctica
+Owners: tzdata
+
+Name: tzdata/Zones/Arctic
+Template: tzdata/Zones/Arctic
+Owners: tzdata
+
+Name: tzdata/Zones/Asia
+Template: tzdata/Zones/Asia
+Owners: tzdata
+
+Name: tzdata/Zones/Atlantic
+Template: tzdata/Zones/Atlantic
+Owners: tzdata
+
+Name: tzdata/Zones/Australia
+Template: tzdata/Zones/Australia
+Owners: tzdata
+
+Name: tzdata/Zones/Etc
+Template: tzdata/Zones/Etc
+Value: UTC
+Owners: tzdata
+Flags: seen
+
+Name: tzdata/Zones/Europe
+Template: tzdata/Zones/Europe
+Owners: tzdata
+
+Name: tzdata/Zones/Indian
+Template: tzdata/Zones/Indian
+Owners: tzdata
+
+Name: tzdata/Zones/Pacific
+Template: tzdata/Zones/Pacific
+Owners: tzdata
+
+Name: tzdata/Zones/SystemV
+Template: tzdata/Zones/SystemV
+Owners: tzdata
+
+Name: tzdata/Zones/US
+Template: tzdata/Zones/US
+Owners: tzdata
+
+Name: ucf/changeprompt
+Template: ucf/changeprompt
+Owners: ucf
+
+Name: ucf/changeprompt_threeway
+Template: ucf/changeprompt_threeway
+Owners: ucf
+
+Name: ucf/conflicts_found
+Template: ucf/conflicts_found
+Owners: ucf
+
+Name: ucf/show_diff
+Template: ucf/show_diff
+Owners: ucf
+
+Name: ucf/title
+Template: ucf/title
+Owners: ucf
+
+Name: xserver-xorg-legacy/xwrapper/actual_allowed_users
+Template: xserver-xorg-legacy/xwrapper/actual_allowed_users
+Value: console
+Owners: xserver-xorg-legacy
+
+Name: xserver-xorg-legacy/xwrapper/allowed_users
+Template: xserver-xorg-legacy/xwrapper/allowed_users
+Value: Console Users Only
+Owners: xserver-xorg-legacy
+

@@ -1,0 +1,12 @@
+/.
+/lib
+/lib/arm-linux-gnueabi
+/lib/arm-linux-gnueabi/libnl-genl-3.so.200.22.0
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libnl-genl-3-200
+/usr/share/doc/libnl-genl-3-200/changelog.Debian.gz
+/usr/share/doc/libnl-genl-3-200/changelog.gz
+/usr/share/doc/libnl-genl-3-200/copyright
+/lib/arm-linux-gnueabi/libnl-genl-3.so.200

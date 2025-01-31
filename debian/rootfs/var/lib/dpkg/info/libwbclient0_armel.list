@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libwbclient.so.0.13
+/usr/lib/arm-linux-gnueabi/samba
+/usr/lib/arm-linux-gnueabi/samba/libwinbind-client.so.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libwbclient0
+/usr/share/doc/libwbclient0/NEWS.Debian.gz
+/usr/share/doc/libwbclient0/changelog.Debian.gz
+/usr/share/doc/libwbclient0/copyright
+/usr/lib/arm-linux-gnueabi/libwbclient.so.0

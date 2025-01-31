@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libinput.so.10.11.5
+/usr/share
+/usr/share/doc
+/usr/share/doc/libinput10
+/usr/share/doc/libinput10/changelog.Debian.gz
+/usr/share/doc/libinput10/copyright
+/usr/lib/arm-linux-gnueabi/libinput.so.10

@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libevdev.so.2.1.18
+/usr/share
+/usr/share/doc
+/usr/share/doc/libevdev2
+/usr/share/doc/libevdev2/changelog.Debian.gz
+/usr/share/doc/libevdev2/copyright
+/usr/lib/arm-linux-gnueabi/libevdev.so.2

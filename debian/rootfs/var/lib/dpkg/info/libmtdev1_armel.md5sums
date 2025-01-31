@@ -1,0 +1,7 @@
+a691c3cab7b0ece2a92d2c6e6431d293  usr/lib/arm-linux-gnueabi/libmtdev.so.1.0.0
+77fa9ca780d9f1feaf1d371d28c35013  usr/share/apport/package-hooks/source_mtdev.py
+44c90547a174211ac66c73bc9fd4ad62  usr/share/doc/libmtdev1/README
+0dac0e11780f73007fa04f68b676d56d  usr/share/doc/libmtdev1/changelog.Debian.armel.gz
+1879ee3fbcf99f43501e2b30dcefb752  usr/share/doc/libmtdev1/changelog.Debian.gz
+6a977b49c6797429ebc0c0a0a5ca6f6c  usr/share/doc/libmtdev1/changelog.gz
+fdd0bdfd2de7e8aac7334fc562ec9cad  usr/share/doc/libmtdev1/copyright

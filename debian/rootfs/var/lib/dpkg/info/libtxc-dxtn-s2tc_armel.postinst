@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+
+update-alternatives --install \
+	/usr/lib/arm-linux-gnueabi/libtxc_dxtn.so libtxc-dxtn-arm-linux-gnueabi /usr/lib/arm-linux-gnueabi/s2tc/libtxc_dxtn.so 10
+
+

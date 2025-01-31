@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libgpm.so.2
+/usr/share
+/usr/share/doc
+/usr/share/doc/libgpm2
+/usr/share/doc/libgpm2/changelog.Debian.armel.gz
+/usr/share/doc/libgpm2/changelog.Debian.gz
+/usr/share/doc/libgpm2/changelog.gz
+/usr/share/doc/libgpm2/copyright

@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libwayland-server.so.0.1.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libwayland-server0
+/usr/share/doc/libwayland-server0/changelog.Debian.gz
+/usr/share/doc/libwayland-server0/copyright
+/usr/lib/arm-linux-gnueabi/libwayland-server.so.0

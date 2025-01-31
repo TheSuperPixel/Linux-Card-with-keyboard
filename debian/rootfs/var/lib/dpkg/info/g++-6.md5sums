@@ -1,0 +1,5 @@
+2db2ffbec3a5cb4a03c704f506c37a9f  usr/bin/arm-linux-gnueabi-g++-6
+bb603835b531baa3b0dde4fbda43b0f3  usr/lib/gcc/arm-linux-gnueabi/6/cc1plus
+d34e924e0b649f39a4c876c1a4ec4e1f  usr/share/doc/gcc-6-base/C++/README.C++
+3a2ef22887039e980a029c1e8d243d64  usr/share/doc/gcc-6-base/C++/changelog.gz
+9eb5e8ad026ae2ac67886bd5f11a42d6  usr/share/lintian/overrides/g++-6

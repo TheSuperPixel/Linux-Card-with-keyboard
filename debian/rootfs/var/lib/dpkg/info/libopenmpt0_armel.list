@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libopenmpt.so.0.0.20
+/usr/share
+/usr/share/doc
+/usr/share/doc/libopenmpt0
+/usr/share/doc/libopenmpt0/changelog.Debian.gz
+/usr/share/doc/libopenmpt0/changelog.gz
+/usr/share/doc/libopenmpt0/copyright
+/usr/lib/arm-linux-gnueabi/libopenmpt.so.0

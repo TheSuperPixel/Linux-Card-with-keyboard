@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/s2tc
+/usr/lib/arm-linux-gnueabi/s2tc/libtxc_dxtn.so
+/usr/share
+/usr/share/doc
+/usr/share/doc/libtxc-dxtn-s2tc
+/usr/share/doc/libtxc-dxtn-s2tc/README.txt
+/usr/share/doc/libtxc-dxtn-s2tc/changelog.Debian.gz
+/usr/share/doc/libtxc-dxtn-s2tc/copyright

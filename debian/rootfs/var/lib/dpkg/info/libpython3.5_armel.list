@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libpython3.5m.so.1.0
+/usr/lib/python3.5
+/usr/lib/python3.5/config-3.5m-arm-linux-gnueabi
+/usr/share
+/usr/share/doc
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libpython3.5
+/usr/lib/arm-linux-gnueabi/libpython3.5m.so.1
+/usr/lib/python3.5/config-3.5m-arm-linux-gnueabi/libpython3.5.so
+/usr/lib/python3.5/config-3.5m-arm-linux-gnueabi/libpython3.5m.so
+/usr/share/doc/libpython3.5

@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libpython2.7.so.1.0
+/usr/lib/python2.7
+/usr/lib/python2.7/config-arm-linux-gnueabi
+/usr/share
+/usr/share/doc
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libpython2.7
+/usr/lib/arm-linux-gnueabi/libpython2.7.so.1
+/usr/lib/python2.7/config-arm-linux-gnueabi/libpython2.7.so
+/usr/share/doc/libpython2.7

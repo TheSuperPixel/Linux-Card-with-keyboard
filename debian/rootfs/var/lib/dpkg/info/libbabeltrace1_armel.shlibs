@@ -1,0 +1,3 @@
+libbabeltrace-dummy 1 libbabeltrace1
+libbabeltrace-lttng-live 1 libbabeltrace1
+libbabeltrace 1 libbabeltrace1

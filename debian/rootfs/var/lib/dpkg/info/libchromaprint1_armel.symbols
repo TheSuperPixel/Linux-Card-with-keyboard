@@ -1,0 +1,33 @@
+libchromaprint.so.1 libchromaprint1 #MINVER#
+| libchromaprint1 (>= 1.4.2), libchromaprint1 (<< 1.4.3)
+ _ZNSt6vectorISt4pairIjjESaIS1_EE19_M_emplace_back_auxIJS1_EEEvDpOT_@Base 0.6 1
+ _ZNSt6vectorIdSaIdEE14_M_fill_insertEN9__gnu_cxx17__normal_iteratorIPdS1_EEjRKd@Base 0.6 1
+ _ZNSt6vectorIdSaIdEEaSERKS1_@Base 0.6 1
+ _ZNSt6vectorIhSaIhEE12emplace_backIJhEEEvDpOT_@Base 0.6 1
+ _ZNSt6vectorIhSaIhEE17_M_default_appendEj@Base 0.6 1
+ _ZNSt6vectorIhSaIhEE7reserveEj@Base 0.6 1
+ _ZNSt6vectorIjSaIjEE12emplace_backIJjEEEvDpOT_@Base 0.6 1
+ _ZNSt6vectorIjSaIjEE14_M_fill_assignEjRKj@Base 0.6 1
+ _ZNSt6vectorIjSaIjEE19_M_emplace_back_auxIJjEEEvDpOT_@Base 0.6 1
+ chromaprint_clear_fingerprint@Base 1.4.1
+ chromaprint_dealloc@Base 1.3.2
+ chromaprint_decode_fingerprint@Base 1.3.2
+ chromaprint_encode_fingerprint@Base 1.3.2
+ chromaprint_feed@Base 1.3.2
+ chromaprint_finish@Base 1.3.2
+ chromaprint_free@Base 1.3.2
+ chromaprint_get_delay@Base 1.4.1
+ chromaprint_get_delay_ms@Base 1.4.1
+ chromaprint_get_fingerprint@Base 1.3.2
+ chromaprint_get_fingerprint_hash@Base 1.3.2
+ chromaprint_get_item_duration@Base 1.4.1
+ chromaprint_get_item_duration_ms@Base 1.4.1
+ chromaprint_get_num_channels@Base 1.4.1
+ chromaprint_get_raw_fingerprint@Base 1.3.2
+ chromaprint_get_raw_fingerprint_size@Base 1.4.1
+ chromaprint_get_sample_rate@Base 1.4.1
+ chromaprint_get_version@Base 1.3.2
+ chromaprint_hash_fingerprint@Base 1.3.2
+ chromaprint_new@Base 1.3.2
+ chromaprint_set_option@Base 1.3.2
+ chromaprint_start@Base 1.3.2

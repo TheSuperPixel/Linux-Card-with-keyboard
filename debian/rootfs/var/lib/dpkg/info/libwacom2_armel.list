@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libwacom.so.2.5.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libwacom2
+/usr/share/doc/libwacom2/changelog.Debian.armel.gz
+/usr/share/doc/libwacom2/changelog.Debian.gz
+/usr/share/doc/libwacom2/copyright
+/usr/lib/arm-linux-gnueabi/libwacom.so.2

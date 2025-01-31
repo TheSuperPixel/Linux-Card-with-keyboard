@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libgme.so.0.6.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libgme0
+/usr/share/doc/libgme0/changelog.Debian.gz
+/usr/share/doc/libgme0/changelog.gz
+/usr/share/doc/libgme0/copyright
+/usr/lib/arm-linux-gnueabi/libgme.so.0

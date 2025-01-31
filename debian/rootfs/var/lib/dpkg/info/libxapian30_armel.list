@@ -1,0 +1,13 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libxapian.so.30.3.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libxapian30
+/usr/share/doc/libxapian30/TODO.Debian
+/usr/share/doc/libxapian30/changelog.Debian.gz
+/usr/share/doc/libxapian30/changelog.gz
+/usr/share/doc/libxapian30/copyright
+/usr/lib/arm-linux-gnueabi/libxapian.so.30

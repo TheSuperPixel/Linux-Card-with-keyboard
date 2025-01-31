@@ -1,0 +1,17 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libpytalloc-util.so.2.1.8
+/usr/lib/python2.7
+/usr/lib/python2.7/dist-packages
+/usr/lib/python2.7/dist-packages/talloc.arm-linux-gnueabi.so
+/usr/share
+/usr/share/doc
+/usr/share/doc/python-talloc
+/usr/share/doc/python-talloc/changelog.Debian.gz
+/usr/share/doc/python-talloc/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/python-talloc
+/usr/lib/arm-linux-gnueabi/libpytalloc-util.so.2

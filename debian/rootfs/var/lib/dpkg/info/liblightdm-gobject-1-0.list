@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/liblightdm-gobject-1.so.0.0.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/liblightdm-gobject-1-0
+/usr/share/doc/liblightdm-gobject-1-0/changelog.Debian.gz
+/usr/share/doc/liblightdm-gobject-1-0/changelog.gz
+/usr/share/doc/liblightdm-gobject-1-0/copyright
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/liblightdm-gobject-1-0
+/usr/lib/arm-linux-gnueabi/liblightdm-gobject-1.so.0

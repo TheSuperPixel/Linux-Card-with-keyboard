@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libx264.so.148
+/usr/lib/arm-linux-gnueabi/neon
+/usr/lib/arm-linux-gnueabi/neon/vfp
+/usr/lib/arm-linux-gnueabi/neon/vfp/libx264.so.148
+/usr/lib/arm-linux-gnueabi/x264-10bit
+/usr/lib/arm-linux-gnueabi/x264-10bit/libx264.so.148
+/usr/share
+/usr/share/doc
+/usr/share/doc/libx264-148
+/usr/share/doc/libx264-148/changelog.Debian.gz
+/usr/share/doc/libx264-148/copyright

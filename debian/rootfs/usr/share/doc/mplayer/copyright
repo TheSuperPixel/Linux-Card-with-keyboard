@@ -1,0 +1,366 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: MPlayer
+Source: https://www.mplayerhq.hu
+Copyright: GPL-2+
+
+Files: *
+Copyright:
+ 2000-2015 MPlayer Team
+ 1995-1999 by Michael Hipp
+ 2006 Zuxy MENG <zuxy.meng@gmail.com>
+License: GPL-2+
+
+Files: debian/*
+Copyright:
+ 2014-2015 Miguel A. Colón Vélez <debian.micove@gmail.com>
+ 2009-2013 Reinhard Tartler <siretart@tauware.de>
+ 2003-2009 Andrea Mennucc1 <mennucc1@debian.org>
+ 2001 TeLeNiEkO <telenieko@telenieko.com>
+License: GPL-2+
+
+Files: libmpeg2/*
+Copyright:
+ 1999-2000 Aaron Holtzman <aholtzma@ess.engr.uvic.ca>
+ 2000-2004 Michel Lespinasse <walken@zoy.org>
+ 2002-2003 Falk Hueffner <falk@debian.org>
+ 2003 David S. Miller <davem@redhat.com>
+ 2003 Regis Duchesne <hpreg@zoy.org>
+ 2003 Peter Gubanov <peter@elecard.net.ru>
+ 2004 AGAWA Koji <i@atty.jp>
+License: GPL-2+
+Comment: Version 0.5.1 + patches, cf. http://libmpeg2.sourceforge.net/
+
+Files: loader/*
+Copyright:
+ 1993 Robert J. Amstadt
+ 1994 Eric Youndale & Erik Bos
+ 1995 Thomas Sandford
+ 1995-1996 Alexandre Julliard
+ 1996-1998 Marcus Meissner
+ 1996 Martin von Loewis
+ 1999 Bertho A. Stultiens
+ 2000-2001 Eugene Kuznetsov  (divx@euro.ru)
+License: GPL-2+
+Comment: avifile DLL loader, Version 0.47 + patches + CVS updates, cf. http://avifile.sourceforge.net/
+
+Files:
+ stream/dvbin.h
+ stream/rtp.c
+ stream/stream_dvb.c
+Copyright:
+ 2001-2002 Dave Chapman <dave@dchapman.com>
+License: GPL-2+
+Comment: Version 0.4.3-pre3 + patches, cf. http://sourceforge.net/projects/dvbtools/
+
+Files: stream/librtsp/*
+Copyright:
+ 2000-2002 the xine project
+License: GPL-2+
+Comment: librtsp, from xine CVS 2003/04/10 + patches, cf. http://www.xinehq.de
+
+Files: stream/realrtsp/*
+Copyright:
+ 2000-2002 the xine project
+License: GPL-2+
+Comment: realrtsp, from xine CVS 2003/04/17 + patches, cf. http://www.xinehq.de
+
+Files:
+ stream/pnm.c
+ stream/pnm.h
+Copyright:
+ 2000-2002 the xine project
+License: GPL-2+
+Comment: pnm protocol implementation, from xine CVS 2002/12/26 + patches, cf. http://www.xinehq.de
+
+Files: libmpdemux/genres.h
+Copyright:
+ 2001  Jason Carter
+License: GPL-2+
+Comment: id3edit, Version 1.9 + patches, cf. http://id3edit.sourceforge.net/
+
+Files: stream/freesdp/*
+Copyright:
+ 2001-2003 Federico Montesino Pouzols <fedemp@suidzer0.org>
+License: GPL-2+
+Comment: FreeSDP, Version 0.4.1, cf. https://savannah.nongnu.org/projects/freesdp/
+
+Files:
+ libmpdemux/yuv4mpeg.c
+ libmpdemux/yuv4mpeg.h
+ libmpdemux/yuv4mpeg_intern.h
+ libmpdemux/yuv4mpeg_ratio.c
+Copyright:
+ 2001 Matthew J. Marjanovic <maddog@mir.com>
+ 2001 Andrew Stevens <andrew.stevens@philips.com>
+License: GPL-2+
+Comment: mjpeg.sourceforge.net
+
+Files:
+ libmpcodecs/native/rtjpegn.c
+ libmpcodecs/native/rtjpegn.h
+Copyright:
+ 1998 Justin Schoeman (justin@suntiger.ee.up.ac.za)
+ 1998-1999 Joerg Walter <trouble@moes.pmnet.uni-oldenburg.de>
+ 1999 Wim Taymans <wim.taymans@tvd.be>
+License: GPL-2+
+Comment: NuppelVideo / RTJPEG, 0.52a + patches
+
+Files:
+ vidix/dhahelperwin/ntverp.h
+ vidix/dhahelperwin/common.ver
+Copyright:
+ 2007 Alex Ionescu <alex.ionescu@reactos.org>
+License: GPL-2+
+Comment: ReactOS, svn r25937, cf. http://www.reactos.org/
+
+Files:
+ etc/mplayer.ico
+ etc/mplayer*.png
+Copyright:
+ 2012 Andreas Nilsson <andreas@andreasn.se>
+License: GPL-2+
+
+Files:
+ xvid_vbr.c
+ xvid_vbr.h
+Copyright:
+ 2002 Edouard Gomez <ed.gomez@wanadoo.fr>
+License: GPL-2+
+
+Files:
+ TOOLS/alaw-gen.c
+ TOOLS/asfinfo.c
+ TOOLS/avi-fix.c
+ TOOLS/avisubdump.c
+ TOOLS/binary_codecs.sh
+ TOOLS/checktree.sh
+ TOOLS/compare.c
+ TOOLS/divx2svcd.sh
+ TOOLS/dump_mp4.c
+ TOOLS/edgedetect.fp
+ TOOLS/edgeenh.fp
+ TOOLS/emboss.fp
+ TOOLS/fastmemcpybench.c
+ TOOLS/mencvcd.sh
+ TOOLS/midentify.sh
+ TOOLS/modify_reg.c
+ TOOLS/movinfo.c
+ TOOLS/netstream.c
+ TOOLS/plotpsnr.pl
+ TOOLS/psnr-video.sh
+ TOOLS/qepdvcd.sh
+ TOOLS/subrip.c
+ TOOLS/vivodump.c
+ TOOLS/wma2ogg.pl
+Copyright:
+ 2001 Michael Niedermayer <michaelni@gmx.at>
+ 2001 Felix Bünemann <atmosfear@users.sourceforge.net>
+ 2001-2004 Árpád Gereöffy <arpi@thot.banki.hu>
+ 2002 Jürgen Hammelmann <juergen.hammelmann@gmx.de>
+ 2002-2003 Kim Minh Kaplan <kmkaplan@selfoffice.com>
+ 2002-2005 Tobias Diedrich <ranma+mplayer@tdiedrich.de>
+ 2003 Alban Bedel <albeu@free.fr>
+ 2003 Robert Nagy <thuglife@linuxforum.hu>
+ 2003 Jonas Jermann <jjermann@gmx.net>
+ 2003 Vajna Miklos <mainroot@freemail.hu>
+ 2003-2009 Andrea Mennucc1 <mennucc1@debian.org>
+ 2004 Peter Simon <simon.peter@linuxuser.hu>
+ 2005 Matthias Wieser <mwieser@gmx.de>
+ 2005 Reimar Döffinger <reimar.doeffinger@stud.uni-karlsruhe.de>
+ 2005-2006 Reynaldo H. Verdejo Pinochet <reynaldo@opendot.cl>
+ 2005-2007 Ivo van Poorten <ivop@euronet.nl>
+ 2007 Alan Nisota <alannisota@gmail.com>
+License: GPL-2+
+
+Files:
+ TOOLS/dvd2divxscript.pl
+ TOOLS/subedit.pl
+ TOOLS/vfw2menc.c
+Copyright:
+ 2002-2004 Florian Schilhabel <florian.schilhabel@web.de>
+ 2004 Michael Klepikov <mike72@mail.ru>
+ 2006 Gianluigi Tiesi <sherpya@netfarm.it>
+License: LGPL-2.1+
+
+Files: mpx86asm.h
+Copyright:
+ 2006 Michael Niedermayer <michaelni@gmx.at>
+License: LGPL-2.1+
+Comment: http://www.ffmpeg.org
+
+Files:
+ libmpdemux/demux_avs.c
+ libmpdemux/demux_avs.h
+ libmpdemux/demux_rawdv.c
+ libvo/vo_dfbmga.c
+ libvo/vo_directfb2.c
+ libvo/vo_gif89a.c
+Copyright:
+ 2002 Joey Parrish <joey@nicewarrior.org>
+ 2002 Jiri Svoboda <Jiri.Svoboda@seznam.cz>
+ 2002 Alexander Neundorf <neundorf@kde.org>
+ 2002-2008 Ville Syrjala <syrjala@sci.fi>
+ 2003 Kevin Atkinson
+ 2005 Gianluigi Tiesi <sherpya@netfarm.it>
+License: LGPL-2.1+
+
+Files:
+ libmpdemux/demux_xmms_plugin.h
+Copyright:
+ 1998-2000 Peter Alm
+ 1998-2000 Mikael Alm
+ 1998-2000 Olle Hallnas
+ 1998-2000 Thomas Nilsson
+ 1998-2000 4Front Technologies
+License: BSD-2-Clause
+
+Files:
+ osdep/timer-darwin.c
+ vidix/cyberblade_regs.h
+ vidix/sysdep/libdha_os2.c
+ vidix/sysdep/pci_386bsd.c
+ vidix/sysdep/pci_freebsd.c
+ vidix/sysdep/pci_isc.c
+ vidix/sysdep/pci_linux.c
+ vidix/sysdep/pci_lynx.c
+ vidix/sysdep/pci_mach386.c
+ vidix/sysdep/pci_netbsd.c
+ vidix/sysdep/pci_openbsd.c
+ vidix/sysdep/pci_os2.c
+ vidix/sysdep/pci_sco.c
+ vidix/sysdep/pci_svr4.c
+ vidix/sysdep/pci_win32.c
+ vidix/unichrome_regs.h
+Copyright:
+ 1992-2000 Alan Hourihane <alanh@fairlite.demon.co.uk>
+ 1994-1999 Holger Veit <Holger.Veit@gmd.de>
+ 1995 Robin Cutshaw <robin@XFree86.Org>
+ 1996 Sebastien Marineau <marineau@genie.uottawa.ca>
+ 1998-2003 VIA Technologies, Inc.
+ 2001-2003 S3 Graphics, Inc.
+ 2003-2004 Dan Villiom Podlaski Christiansen
+License: Expat
+
+Files: libass/*
+Copyright:
+ 2006 Evgeniy Stepanov <eugeni.stepanov@gmail.com>
+ 2009-2011 Grigori Goronzy <greg@geekmind.org>
+License: ISC
+
+Files: libass/ass_strtod.c
+Copyright:
+ 1988-1993 The Regents of the University of California
+ 1994 Sun Microsystems, Inc
+License: other-1
+
+Files: TOOLS/w32codec_dl.pl
+Copyright:
+ 2002 Tom Lees <tal26@cam.ac.uk>
+License: public-domain-tom
+ By Tom Lees, 2002. I hereby place this script into the public domain.
+
+Files: TOOLS/vobshift.py
+Copyright:
+ Gábor Farkas <gabor@nekomancer.net>
+License: other-2
+ "license: i don't care ;)"
+
+License: GPL-2+
+ This program is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later
+ version.
+ .
+ This program is distributed in the hope that it will be
+ useful, but WITHOUT ANY WARRANTY; without even the implied
+ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ PURPOSE.  See the GNU General Public License for more
+ details.
+ .
+ You should have received a copy of the GNU General Public
+ License along with this package; if not, write to the Free
+ Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ Boston, MA  02110-1301 USA
+ .
+ On Debian systems, the full text of the GNU General Public
+ License version 2 can be found in the file
+ `/usr/share/common-licenses/GPL-2'.
+
+License: LGPL-2.1+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+ .
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+
+License: ISC
+ Permission to use, copy, modify, and/or distribute this software for any
+ purpose with or without fee is hereby granted, provided that the above
+ copyright notice and this permission notice appear in all copies.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+License: other-1
+ Permission to use, copy, modify, and distribute this
+ software and its documentation for any purpose and without
+ fee is hereby granted, provided that the above copyright
+ notice appear in all copies.  The University of California
+ makes no representations about the suitability of this
+ software for any purpose.  It is provided "as is" without
+ express or implied warranty.
+
+License: BSD-2-Clause
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ 1. Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ .
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: Expat
+ Permission is hereby granted, free of charge, to any person obtaining a copy of
+ this software and associated documentation files (the "Software"), to deal in
+ the Software without restriction, including without limitation the rights to
+ use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ of the Software, and to permit persons to whom the Software is furnished to do
+ so, subject to the following conditions:
+ .
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+ .
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.

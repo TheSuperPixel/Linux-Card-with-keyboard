@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
+<title>How to configure input</title>
+<link rel="stylesheet" href="../xsf.css" type="text/css" />
+
+
+<script type="text/javascript" src="../asciidoc-xhtml11.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1><a href="../index.html">XSF</a> / How to configure input</h1>
+<span id="author">Cyril Brulebois</span><br />
+<span id="email"><code>&lt;<a href="mailto:kibi@debian.org">kibi@debian.org</a>&gt;</code></span><br />
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_general_considerations">General considerations</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_foreword">Foreword</h3>
+<div class="paragraph"><p>The Debian wiki also contains an
+<a href="http://wiki.debian.org/XStrikeForce/InputHotplugGuide">input hotplug guide</a>
+which contains some context around X’s input subsystem. The present
+document is meant to be an executive summary, and might miss some
+bits. (<strong>FIXME:</strong> Merge those bits.)</p></div>
+</div>
+<div class="sect2">
+<h3 id="_rules_of_thumb">Rules of thumb</h3>
+<div class="paragraph"><p>In this documentation, only the last part of the driver’s name will be
+mentioned, all of them are under the <code>xserver-xorg-input-*</code> namespace.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+On Linux, <code>evdev</code> is used for both keyboard and mouse
+   input.
+</p>
+</li>
+<li>
+<p>
+On Linux as well, <code>synaptics</code> can be used to benefit from extra
+   features; it takes precedence over <code>evdev</code> automatically if both
+   are installed.
+</p>
+</li>
+<li>
+<p>
+On GNU/kFreeBSD and GNU/Hurd, <code>kbd</code> handles the keyboard and
+   <code>mouse</code> handles mice, unsurprisingly.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_configuration_snippets">Configuration snippets</h3>
+<div class="paragraph"><p>X can now be run without <code>xorg.conf</code>, but sometimes one has to
+configure a few settings for this or that driver. Starting with
+<code>squeeze</code>, that can be done by adding a file under
+<code>/etc/X11/xorg.conf.d</code>, with a <code>.conf</code> suffix, as documented in the
+<code>xorg.conf</code> manpage.</p></div>
+<div class="paragraph"><p>Some packages ship a default configuration file under
+<code>/usr/share/X11/xorg.conf.d</code> with general rules to match appropriate
+hardware. The files under <code>/etc/X11/xorg.conf.d</code> take precedence, as
+documented in the <code>xorg.conf</code> manpage.</p></div>
+<div class="paragraph"><p>It’s probably mostly useful in the <code>synaptics</code> case, in case one wants
+to change default settings on a system-wide fashion. See the <em>Pointer
+configuration</em> section below for an example.</p></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_basic_keyboard_configuration">Basic keyboard configuration</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The <code>keyboard-configuration</code> package ships <code>/etc/default/keyboard</code>
+which can be used to set the following <code>xkb</code> items: model, layout,
+variant, and options. Here’s an example:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>XKBMODEL="pc105"
+XKBLAYOUT="fr"
+XKBVARIANT="oss"
+XKBOPTIONS="compose:menu,terminate:ctrl_alt_bksp"</code></pre>
+</div></div>
+<div class="paragraph"><p>Quick words about the options:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+They are comma-separated.
+</p>
+</li>
+<li>
+<p>
+The list of options and a short description for each can be found
+   in the <code>/usr/share/X11/xkb/rules/base.lst</code> file (shipped by the
+   <code>xkb-data</code> package).
+</p>
+</li>
+<li>
+<p>
+First option: <code>compose:menu</code>. This sets the <code>menu</code> key as the
+   Compose key. More information about it can be found in the
+   <code>Compose</code> manpage.
+</p>
+</li>
+<li>
+<p>
+Second option: <code>terminate:ctrl_alt_bksp</code>. By default, the X server
+   is no longer killed through <code>Ctrl+Alt+Backspace</code>. This option
+   restores the old behaviour.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Two ways to change the configuration:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>dpkg-reconfigure keyboard-configuration</code> is going to ask questions
+   through debconf prompts.
+</p>
+</li>
+<li>
+<p>
+Manually editing <code>/etc/default/keyboard</code> also works.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>How does it propagate to X?</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+When HAL is used (that is: on GNU/kFreeBSD and GNU/Hurd), one has
+   to restart it: <code>invoke-rc.d hal restart</code>
+</p>
+</li>
+<li>
+<p>
+When udev is used (on GNU/Linux, starting with <code>squeeze</code>), one has
+   to tell udev to reload input-related configuration:
+   <code>udevadm trigger --subsystem-match=input --action=change</code>
+   (that can be found in <code>keyboard-configuration</code>’s <code>README.Debian</code>
+   file). Properties attached to the input devices are then updated,
+   and X uses those properties when it starts, as can be seen by
+   searching for <code>xkb_</code> in the X log. Please note that trying
+   <code>invoke-rc.d udev restart</code> changes nothing, one has to use
+   <code>udevadm</code>. Properties can be inspected through:
+   <code>/sbin/udevadm info --export-db</code>
+</p>
+</li>
+</ul></div>
+<div style="page-break-after:always"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pointer_configuration">Pointer configuration</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_evdev_configuration">evdev configuration</h3>
+<div class="paragraph"><p>Available options are documented in the <code>evdev</code> manpage. Let’s check
+what a configuration snippet (mentioned in <em>General considerations</em>)
+would look like. Here is a fictional <code>/etc/X11/xorg.conf.d/42-evdev.conf</code>:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>Section "InputClass"
+    Identifier "evdev pointer tweaked catchall"
+    MatchIsPointer "on"
+    Driver "evdev"
+    Option "Emulate3Buttons" "True"
+    Option "SwapAxes" "True"
+EndSection</code></pre>
+</div></div>
+<div class="paragraph"><p>Line by line walkthrough:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+To avoid specifying any device under <code>/dev/input</code> (<code>event$N</code> might
+   change, remember it’s about hotplug support!), we use an
+   <code>InputClass</code>.
+</p>
+</li>
+<li>
+<p>
+We need an identifier, the actual name doesn’t matter.
+</p>
+</li>
+<li>
+<p>
+We match everything that looks like a touchpad. Meaning no generic
+   pointer, keyboard, or tablet.
+</p>
+</li>
+<li>
+<p>
+We specify the driver we want to use for the matched device(s).
+</p>
+</li>
+<li>
+<p>
+Finally the options we want to set. Here we enable the 3rd button
+   emulation (clicking left and right buttons at the same time then no
+   longer acts as if the middle button was clicked). Then we swap x
+   and y axes, just for the fun of it.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_synaptics_configuration">synaptics configuration</h3>
+<div class="paragraph"><p>The <code>synaptics</code> driver comes with two tools. The more interesting one
+is <code>synclient</code>, which can be used to list available options and
+current settings: <code>synclient -l</code>. The documentation for each option
+can be found in the <code>synaptics</code> manpage.</p></div>
+<div class="paragraph"><p><code>synclient</code> can also be used to set options. A common example is
+enabling tapping (upstream kept it disabled by default, Debian won’t
+deviate, no need to file bugs): <code>synclient TapButton1=1</code>; one can also
+disable the touchpad temporarily: <code>synclient TouchpadOff=1</code> to
+disable it, <code>synclient TouchpadOff=0</code> to enable it again.</p></div>
+<div class="paragraph"><p>Let’s check what a configuration snippet (mentioned in <em>General
+considerations</em>) would look like. Here is a fictional
+<code>/etc/X11/xorg.conf.d/42-synaptics.conf</code>:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>Section "InputClass"
+    Identifier "touchpad tweaked catchall"
+    MatchIsTouchpad "on"
+    Driver "synaptics"
+    Option "TapButton1" "1"
+    Option "HorizEdgeScroll" "1"
+EndSection</code></pre>
+</div></div>
+<div class="paragraph"><p>Line by line walkthrough:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+To avoid specifying any device under <code>/dev/input</code> (<code>event$N</code> might
+   change, remember it’s about hotplug support!), we use an
+   <code>InputClass</code>.
+</p>
+</li>
+<li>
+<p>
+We need an identifier, the actual name doesn’t matter.
+</p>
+</li>
+<li>
+<p>
+We match everything that looks like a touchpad. Meaning no generic
+   pointer, keyboard, or tablet.
+</p>
+</li>
+<li>
+<p>
+We specify the driver we want to use for the matched device(s).
+</p>
+</li>
+<li>
+<p>
+Finally the options we want to set. We enable tapping for the first
+   button. And we enable horizontal scrolling (by default, only
+   vertical scrolling is enabled).
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Settings can also be changed by various settings managers, like
+Gnome’s or KDE’s. An example of a graphical user interface making it
+possible to set options in a clicky way: <code>gpointing-device-settings</code>.</p></div>
+<div class="paragraph"><p>There’s a palm detection setting but that relies on hardware/firmware
+support for the touchpad. The other tool shipped with the <code>synaptics</code>
+driver is <code>syndaemon</code>, which makes it trivial to disable the touchpad
+temporarily, when the keyboard is being used. Here’s an example:
+<code>syndaemon -d -i 0.5</code> makes <code>syndaemon</code> start in background (<code>-d</code> for
+daemon mode), waiting 0.5 second before enabling the touchpad again
+after the last keypress. Warning: it becomes quite difficult to use
+things like <code>Ctrl+click</code> in a browser, or <code>Alt+drag</code> to move
+windows.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated
+ 2016-11-23 07:30:35 UTC
+</div>
+</div>
+</body>
+</html>

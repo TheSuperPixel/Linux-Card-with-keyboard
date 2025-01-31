@@ -1,0 +1,121 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR X11)
+/*
+ * Copyright 2018 Icenowy Zheng <icenowy@aosc.io>
+ */
+
+/dts-v1/;
+#include "suniv-f1c100s.dtsi"
+
+// my
+#define GPIO_ACTIVE_LOW 1 
+#define GPIO_ACTIVE_HIGH 0 
+
+/ {
+	model = "Lichee Pi Nano";
+	compatible = "licheepi,licheepi-nano", "allwinner,suniv-f1c100s";
+
+	aliases {
+		serial0 = &uart0;
+	};
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+	};
+
+	//my
+	//配置用于描述一个名为 vcc3v3 的电源轨，它提供恒定的3.3伏特电压
+	reg_vcc3v3: vcc3v3 {
+        compatible = "regulator-fixed";
+        regulator-name = "vcc3v3";
+        regulator-min-microvolt = <3300000>;
+        regulator-max-microvolt = <3300000>;
+        };
+
+        //my io
+        keybard {
+                compatible = "my,keybard";
+                pinctrl-names = "default";
+                /* 将两个子节点都放进同一个状态 (index=0) */
+                pinctrl-0 = <&keybard_out_pins &keybard_in_pins>;
+
+                /* 下面是你驱动中要解析的属性名 */
+                keybard-load = <&pio 4 9 GPIO_ACTIVE_LOW>;   // PE9
+                keybard-clk = <&pio 4 10 GPIO_ACTIVE_LOW>;  // PE10
+                keybard-clken_n = <&pio 4 12 GPIO_ACTIVE_LOW>;  // PE12
+                keybard-in  = <&pio 4 3 GPIO_ACTIVE_LOW>;  // PE3
+
+                status = "okay";
+        };
+
+};
+
+&uart0 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart0_pe_pins>;
+	status = "okay";
+};
+
+//my vcc3v3
+&mmc0 {
+        vmmc-supply = <&reg_vcc3v3>;
+        bus-width = <4>;
+        broken-cd;
+        status = "okay";
+};
+
+//my esp8266
+&spi0 {
+        pinctrl-names = "default";
+        pinctrl-0 = <&spi0_pc_pins>;
+        status = "okay";
+};
+
+//my screen
+// GPIO_ACTIVE_LOW报错，找到GPIO_ACTIVE_LOW的定义：
+// ./linux-5.7.1/include/linux/gpio/machine.h:	GPIO_ACTIVE_LOW			= (1 << 0),
+// ./linux-5.7.1/include/dt-bindings/gpio/gpio.h:#define GPIO_ACTIVE_LOW 1
+// 将GPIO_ACTIVE_LOW替换为1
+&spi1 {
+    st7789v@0 {
+        status = "okay";
+        compatible = "sitronix,st7789v";
+		reg = <0>;
+		spi-max-frequency =<32000000>;        //SPI时钟32M
+		rotate =<270>;                    //屏幕旋转270度
+		spi-cpol;
+		spi-cpha;
+		rgb;                           //颜色格式RGB
+		fps =<30>;                      //刷新30帧率
+		buswidth =<8>;                   //总线宽度8
+		reset-gpios = < &pio 4 4 GPIO_ACTIVE_LOW>;   //GPIOE4  此处将GPIO_ACTIVE_LOW替换为1
+		dc-gpios  = < &pio 4 5 GPIO_ACTIVE_LOW>;   //GPIOE5    此处将GPIO_ACTIVE_LOW替换为1
+		debug =<0>;                     //不开启调试
+    };
+};
+
+//my USB start--------------
+&otg_sram {
+        status = "okay";
+};
+
+&usb_otg {
+        dr_mode = "host"; /* 三个可选项: otg / host / peripheral  我在这里指定为host模式*/
+        status = "okay";
+};
+// GPIO_ACTIVE_HIGH报错，找到GPIO_ACTIVE_HIGH的定义：
+// GPIO_ACTIVE_HIGH		= (0 << 0),
+// 将GPIO_ACTIVE_HIGH替换为0
+&usbphy {
+        usb0_id_det-gpio = <&pio 4 2 GPIO_ACTIVE_HIGH>; /* PE2 */
+        status = "okay";
+};
+//my USB end--------------
+
+// my sound
+&codec {
+    allwinner,audio-routing =
+    "Headphone", "HP",
+    "Headphone", "HPCOM",
+    "MIC", "Mic";
+    status = "okay";
+};

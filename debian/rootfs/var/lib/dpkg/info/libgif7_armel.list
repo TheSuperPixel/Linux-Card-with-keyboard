@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libgif.so.7.0.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libgif7
+/usr/share/doc/libgif7/AUTHORS
+/usr/share/doc/libgif7/NEWS.gz
+/usr/share/doc/libgif7/TODO
+/usr/share/doc/libgif7/changelog.Debian.gz
+/usr/share/doc/libgif7/changelog.gz
+/usr/share/doc/libgif7/copyright
+/usr/lib/arm-linux-gnueabi/libgif.so.7

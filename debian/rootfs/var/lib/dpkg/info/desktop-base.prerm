@@ -1,0 +1,187 @@
+#!/bin/sh
+set -e
+
+# Tag to allow some debhelper commands to inject relevant code
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper rm_conffile /etc/default/kdm.d/10_desktop-base 9.0.0~ desktop-base -- "$@"
+# End automatically added section
+
+
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ]; then
+    # Remove background alternatives for theme packages
+    while read theme filename; do
+        update-alternatives --remove \
+            desktop-background \
+            /usr/share/desktop-base/$theme-theme/wallpaper/contents/images/$filename $priority
+    done << EOF
+softwaves 1024x768.svg
+softwaves 1280x720.svg
+softwaves 1280x800.svg
+softwaves 1280x1024.svg
+softwaves 1600x1200.svg
+softwaves 1920x1080.svg
+softwaves 1920x1200.svg
+softwaves 2560x1440.svg
+softwaves 2560x1600.svg
+lines 1280x1024.svg
+lines 1600x1200.svg
+lines 1920x1080.svg
+lines 1920x1200.svg
+lines 2560x1080.svg
+joy 1280x720.svg
+joy 1280x1024.svg
+joy 1600x1200.svg
+joy 1920x1080.svg
+joy 1920x1200.svg
+joy-inksplat 1280x720.svg
+joy-inksplat 1280x1024.svg
+joy-inksplat 1600x1200.svg
+joy-inksplat 1920x1080.svg
+joy-inksplat 1920x1200.svg
+spacefun 1280x720.svg
+spacefun 1280x1024.svg
+spacefun 1920x1080.svg
+spacefun 1920x1200.svg
+EOF
+    # *Last* remove background *highest priority* alternatives for active theme
+    update-alternatives --remove desktop-background /usr/share/desktop-base/active-theme/wallpaper/contents/images/1920x1080.svg
+
+    # Remove desktop-background.xml alternatives
+    # For theme packages
+    while read theme; do
+        update-alternatives --remove \
+            desktop-background.xml \
+            /usr/share/desktop-base/$theme-theme/wallpaper/gnome-background.xml $priority
+    done << EOF
+softwaves
+lines
+joy
+joy-inksplat
+spacefun
+EOF
+    # *Lastly* remove *highest priority* alternative for active theme
+    update-alternatives --remove \
+        desktop-background.xml \
+        /usr/share/desktop-base/active-theme/wallpaper/gnome-background.xml
+
+    # Remove desktop-lockscreen.xml alternatives
+    # For theme packages
+    while read theme; do
+        update-alternatives --remove \
+            desktop-lockscreen.xml \
+            /usr/share/desktop-base/$theme-theme/lockscreen/gnome-background.xml $priority
+    done << EOF
+softwaves
+lines
+joy
+spacefun
+EOF
+    # *Last* remove *highest priority* alternative for active theme
+    update-alternatives --remove \
+        desktop-lockscreen.xml \
+        /usr/share/desktop-base/active-theme/lockscreen/gnome-background.xml
+
+    # Remove Plasma 5/KDE wallpaper alternatives
+    # For theme packages
+    while read theme; do
+        update-alternatives --remove \
+            desktop-plasma5-wallpaper \
+            /usr/share/desktop-base/$theme-theme/wallpaper
+    done << EOF
+softwaves
+lines
+joy
+joy-inksplat
+spacefun
+EOF
+    # *Last* remove *highest priority* alternative for active theme
+    update-alternatives --remove \
+        desktop-plasma5-wallpaper \
+        /usr/share/desktop-base/active-theme/wallpaper
+
+    # Remove login theme alternatives
+    # For theme packages
+    # Alternative for theme packages
+    while read theme background; do
+        update-alternatives --remove \
+            desktop-login-background \
+            /usr/share/desktop-base/$theme-theme/login/$background
+    done << EOF
+softwaves background.svg
+lines background.svg
+lines background-nologo.svg
+joy background.svg
+spacefun background.svg
+EOF
+    # *Last* remove *highest priority* alternative for active theme
+    update-alternatives --remove \
+        desktop-login-background \
+        /usr/share/desktop-base/active-theme/login/background.svg
+
+    # Remove GRUB alternatives
+    # Remove alternative for the GRUB background/colors config
+    while read theme priority; do
+        update-alternatives --remove \
+            desktop-grub.sh \
+            /usr/share/desktop-base/$theme-theme/grub/grub_background.sh
+    done << EOF
+softwaves
+lines
+joy
+spacefun
+EOF
+    # Remove background alternatives
+    while read theme ratio; do
+        update-alternatives --remove \
+            desktop-grub.sh \
+            /usr/share/desktop-base/$theme-theme/grub/grub_background.sh
+        update-alternatives --remove \
+            desktop-grub \
+            /usr/share/desktop-base/$theme-theme/grub/grub-$ratio.png
+    done << EOF
+softwaves 4x3
+softwaves 16x9
+lines 4x3
+lines 16x9
+joy 4x3
+joy 16x9
+spacefun 4x3
+spacefun 16x9
+EOF
+    ## *Lastly* remove *highest priority* alternative
+    num_grub_efi_installed=$(dpkg-query --list "grub-efi*" 2> /dev/null | grep "^i" | wc -l)
+    if [ $num_grub_efi_installed -gt 0 ] ; then
+        remove_first_ratio=4x3
+        remove_last_ratio=16x9
+    else
+        remove_first_ratio=16x9
+        remove_last_ratio=4x3
+    fi
+    update-alternatives --remove \
+        desktop-grub.sh \
+        /usr/share/desktop-base/active-theme/grub/grub_background.sh
+    update-alternatives --remove \
+        desktop-grub \
+        /usr/share/desktop-base/active-theme/grub/grub-$remove_first_ratio.png
+    update-alternatives --remove \
+        desktop-grub \
+        /usr/share/desktop-base/active-theme/grub/grub-$remove_last_ratio.png
+
+
+    # Remove theme package alternatives
+    while read theme; do
+        update-alternatives --remove \
+            desktop-theme \
+            /usr/share/desktop-base/$theme-theme
+    done << EOF
+lines
+joy
+joy-inksplat
+spacefun
+EOF
+    ## *Lastly* remove *highest priority* alternative
+    update-alternatives --remove \
+        desktop-theme \
+        /usr/share/desktop-base/softwaves-theme
+
+fi

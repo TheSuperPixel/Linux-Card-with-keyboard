@@ -1,0 +1,6 @@
+e58c38529f40beee5264646a38750e20  usr/lib/xorg/modules/drivers/vesa_drv.so
+ba795cb4fd8c51b04a4496c33a64843c  usr/share/doc/xserver-xorg-video-vesa/changelog.Debian.armel.gz
+a07166a292bc5dcf5e18a0cd58a10fd0  usr/share/doc/xserver-xorg-video-vesa/changelog.Debian.gz
+ac12afa7b6c8313b754c49d053cf960c  usr/share/doc/xserver-xorg-video-vesa/changelog.gz
+8f83309724bfa89435607978814ee75f  usr/share/doc/xserver-xorg-video-vesa/copyright
+2a0fae1f5248f326a6b347bc2acdd79b  usr/share/man/man4/vesa.4.gz

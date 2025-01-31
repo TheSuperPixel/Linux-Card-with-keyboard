@@ -1,0 +1,4 @@
+libssh-gcrypt-4: package-name-doesnt-match-sonames libssh-gcrypt4 libssh-gcrypt-threads4
+# The development symlink is not renamed to add the "-gcrypt" suffix
+libssh-gcrypt-4: dev-pkg-without-shlib-symlink usr/lib/x86_64-linux-gnu/libssh-gcrypt.so.4.4.1 usr/lib/x86_64-linux-gnu/libssh-gcrypt.so
+libssh-gcrypt-4: dev-pkg-without-shlib-symlink usr/lib/x86_64-linux-gnu/libssh-gcrypt_threads.so.4.4.1 usr/lib/x86_64-linux-gnu/libssh-gcrypt_threads.so

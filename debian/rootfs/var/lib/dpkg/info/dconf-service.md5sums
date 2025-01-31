@@ -1,0 +1,7 @@
+82848fe3b056eadcd15e77eb2f64d705  usr/lib/dconf/dconf-service
+b0d84954bc27d0a7237e87f8612fc6c4  usr/share/dbus-1/services/ca.desrt.dconf.service
+715d979c7e78425cbdbe53291e3d4406  usr/share/doc/dconf-service/NEWS.Debian.gz
+44e3accbbed955587b16bef3f820ec71  usr/share/doc/dconf-service/changelog.Debian.armel.gz
+83653e5e961c011f1662c57f18e9751f  usr/share/doc/dconf-service/changelog.Debian.gz
+13b63f5a07beec6391a9c2295db3c670  usr/share/doc/dconf-service/copyright
+d5d0d9e5afce5d3e3fb8e6c2e808f7c0  usr/share/man/man1/dconf-service.1.gz

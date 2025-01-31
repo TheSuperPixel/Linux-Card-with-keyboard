@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libtalloc.so.2.1.8
+/usr/share
+/usr/share/doc
+/usr/share/doc/libtalloc2
+/usr/share/doc/libtalloc2/changelog.Debian.gz
+/usr/share/doc/libtalloc2/copyright
+/usr/lib/arm-linux-gnueabi/libtalloc.so.2

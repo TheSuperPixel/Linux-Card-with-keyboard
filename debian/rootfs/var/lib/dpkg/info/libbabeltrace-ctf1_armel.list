@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libbabeltrace-ctf-metadata.so.1.0.0
+/usr/lib/arm-linux-gnueabi/libbabeltrace-ctf-text.so.1.0.0
+/usr/lib/arm-linux-gnueabi/libbabeltrace-ctf.so.1.0.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libbabeltrace-ctf1
+/usr/share/doc/libbabeltrace-ctf1/changelog.Debian.gz
+/usr/share/doc/libbabeltrace-ctf1/changelog.gz
+/usr/share/doc/libbabeltrace-ctf1/copyright
+/usr/lib/arm-linux-gnueabi/libbabeltrace-ctf-metadata.so.1
+/usr/lib/arm-linux-gnueabi/libbabeltrace-ctf-text.so.1
+/usr/lib/arm-linux-gnueabi/libbabeltrace-ctf.so.1

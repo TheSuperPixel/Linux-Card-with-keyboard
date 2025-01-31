@@ -1,0 +1,15 @@
+70e1054bd781ac31e2b88e106c631d8e  usr/bin/broadwayd
+dfa4d8550e8e8c6c56d8b4612951220e  usr/bin/gtk-builder-tool
+e1cc29482947a6d75104796bd4c00b4b  usr/bin/gtk-launch
+57d532675a0d1dc7166604ca9c0247be  usr/bin/gtk-query-settings
+462252ce98d71b71c9ab7717e9fc4d40  usr/share/doc/libgtk-3-bin/AUTHORS
+d2409f5877c8a0b03f71c117e3dbc778  usr/share/doc/libgtk-3-bin/changelog.Debian.gz
+945cf1b861db2024b4fefcf90c2bdd7e  usr/share/doc/libgtk-3-bin/changelog.gz
+9673a7f7df1c1c778ba09b696b341105  usr/share/doc/libgtk-3-bin/copyright
+fcac07ba23461f0e839d198d174b8e08  usr/share/gettext/its/gtkbuilder.its
+259afb64ae43bfb7f47db92189704f04  usr/share/gettext/its/gtkbuilder.loc
+075378a7fb71e6281e4185a947df9ff0  usr/share/man/man1/broadwayd.1.gz
+b5b66f5b7c3852a0d7399957242f7308  usr/share/man/man1/gtk-builder-tool.1.gz
+8aa101ca11586f73390d7b567321ef3c  usr/share/man/man1/gtk-launch.1.gz
+7d5fcdde6c122ad3cbf23a20b03e806a  usr/share/man/man1/gtk-query-immodules-3.0.1.gz
+86701f4d096199c45a17e4136e2b9443  usr/share/man/man1/gtk-query-settings.1.gz

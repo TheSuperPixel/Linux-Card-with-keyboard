@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabi
+/usr/lib/arm-linux-gnueabi/libcroco-0.6.so.3.0.1
+/usr/share
+/usr/share/doc
+/usr/share/doc/libcroco3
+/usr/share/doc/libcroco3/AUTHORS
+/usr/share/doc/libcroco3/NEWS.gz
+/usr/share/doc/libcroco3/README
+/usr/share/doc/libcroco3/changelog.Debian.gz
+/usr/share/doc/libcroco3/changelog.gz
+/usr/share/doc/libcroco3/copyright
+/usr/lib/arm-linux-gnueabi/libcroco-0.6.so.3
