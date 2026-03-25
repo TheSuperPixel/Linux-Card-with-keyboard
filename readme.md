@@ -7,11 +7,14 @@ https://www.bilibili.com/video/BV1h5F7e4Evs
 1.u-boot-nano-v2018.01文件夹是配置好的uboot，可以直接编译运行<br />
 2.linux-5.7.1文件夹是配置好的Linux内核，可以直接编译运行<br />
 3.buildroot-2018.02.11文件夹是已经配置完成的buildroot版本的Linux文件系统，可以直接编译运行<br />
-4.debian文件夹是debian根文件系统<br />
-5.ESP8089-SPI-master文件夹是配置好的网卡驱动，可以直接编译运行<br />
-6.keyboard_drv文件夹是全键盘驱动，可以直接编译运行<br />
-7.pcb文件夹是电路板工程，"Linux小核心板Snail_Core_2"是核心板电路，需要使用嘉立创标准版打开，"ProPrj_SCH_SnailCard底板_2025-01-03_23-10-43_2025-01-31"是底板电路，需要使用嘉立创专业版打开<br />
+3.ESP8089-SPI-master文件夹是配置好的网卡驱动，可以直接编译运行<br />
+4.keyboard_drv文件夹是全键盘驱动，可以直接编译运行<br />
+5.pcb文件夹是电路板工程，"Linux小核心板Snail_Core_2"是核心板电路，需要使用嘉立创标准版打开，"ProPrj_SCH_SnailCard底板_2025-01-03_23-10-43_2025-01-31"是底板电路，需要使用嘉立创专业版打开<br />
 ## 主要参考资料
 1.WhyCan Forum(哇酷开发者社区) 首页» 全志 SOC» 小白自制Linux开发板(F1C200s)整理系列，持续更新中 ，https://whycan.com/t_7275.html<br />
 2.立创开源硬件平台，F1C200S屏幕开发板，https://oshwhub.com/fanhuacloud/f1c200s_lcd_backup<br />
 3.百问网，https://www.100ask.net/
+4.u-boot-nano-v2018.01 来自 https://github.com/Lichee-Pi/u-boot.git
+5.linux-5.7.1 来自 https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.7.1.tar.gz
+6.buildroot-2018.02.11 来自 https://buildroot.org/downloads
+7.ESP8089-SPI-master 来自 https://github.com/notabucketofspam/ESP8089-SPI/
