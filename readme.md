@@ -13,8 +13,8 @@ https://www.bilibili.com/video/BV1h5F7e4Evs
 ## 主要参考资料
 1.WhyCan Forum(哇酷开发者社区) 首页» 全志 SOC» 小白自制Linux开发板(F1C200s)整理系列，持续更新中 ，https://whycan.com/t_7275.html<br />
 2.立创开源硬件平台，F1C200S屏幕开发板，https://oshwhub.com/fanhuacloud/f1c200s_lcd_backup<br />
-3.百问网，https://www.100ask.net/
-4.u-boot-nano-v2018.01 来自 https://github.com/Lichee-Pi/u-boot.git
-5.linux-5.7.1 来自 https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.7.1.tar.gz
-6.buildroot-2018.02.11 来自 https://buildroot.org/downloads
+3.百问网，https://www.100ask.net/<br />
+4.u-boot-nano-v2018.01 来自 https://github.com/Lichee-Pi/u-boot.git<br />
+5.linux-5.7.1 来自 https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.7.1.tar.gz<br />
+6.buildroot-2018.02.11 来自 https://buildroot.org/downloads<br />
 7.ESP8089-SPI-master 来自 https://github.com/notabucketofspam/ESP8089-SPI/
